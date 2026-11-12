@@ -1,0 +1,68 @@
+name: drift
+# Weekly drift report (ADR-0041): last 7 days of non-canary attempts from Neon vs. the older baseline,
+# char n-gram TF-IDF + SVD embeddings, HDBSCAN. Output: reports/drift-YYYY-WW.md as a workflow artifact.
+# Without NEON_DATABASE_URL it prints a notice naming the missing secret and stays green (~10 s).
+on:
+  schedule:
+    - cron: "43 4 * * 1"
+  workflow_dispatch:
+
+concurrency:
+  group: drift
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  drift:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      NEON_DATABASE_URL: ${{ secrets.NEON_DATABASE_URL }}
+      GRAFANA_OTLP_ENDPOINT: ${{ secrets.GRAFANA_OTLP_ENDPOINT }}
+      GRAFANA_OTLP_INSTANCE_ID: ${{ secrets.GRAFANA_OTLP_INSTANCE_ID }}
+      GRAFANA_OTLP_TOKEN: ${{ secrets.GRAFANA_OTLP_TOKEN }}
+    steps:
+      - name: check secrets
+        id: gate
+        # Only variable NAMES are printed, never values.
+        run: |
+          fix="export the value in a shell where gh is logged in, then run: scripts/set_gh_secrets.sh"
+          if [ -z "$NEON_DATABASE_URL" ]; then
+            echo "::notice title=drift skipped::drift SKIPPED (run stays green). Missing required secret: NEON_DATABASE_URL. Fix: $fix"
+            {
+              echo "## Drift: SKIPPED (no database secret)"
+              echo
+              echo "Missing required secret: \`NEON_DATABASE_URL\`. Fix: $fix"
+            } >> "$GITHUB_STEP_SUMMARY"
+            echo "run=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "run=true" >> "$GITHUB_OUTPUT"
+            if [ -z "$GRAFANA_OTLP_TOKEN" ]; then
+              echo "::notice::GRAFANA_OTLP_* not set: drift gauges will not be pushed"
+            fi
+          fi
+      - uses: actions/checkout@v4
+        if: steps.gate.outputs.run == 'true'
+      - uses: astral-sh/setup-uv@v5
+        if: steps.gate.outputs.run == 'true'
+        with:
+          enable-cache: true
+      - name: install runtime dependencies plus scikit-learn
+        if: steps.gate.outputs.run == 'true'
+        run: |
+          uv sync --no-dev --python 3.11
+          uv pip install "scikit-learn>=1.9.1"
+      - name: drift report
+        if: steps.gate.outputs.run == 'true'
+        run: uv run --no-sync python -m breachlab.monitor.drift_job
+      - name: job summary
+        if: steps.gate.outputs.run == 'true'
+        run: cat reports/drift-*.md >> "$GITHUB_STEP_SUMMARY" || true
+      - uses: actions/upload-artifact@v4
+        if: steps.gate.outputs.run == 'true'
+        with:
+          name: drift-report
+          path: reports/drift-*.md
+          if-no-files-found: warn

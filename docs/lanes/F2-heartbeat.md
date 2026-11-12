@@ -1,0 +1,4 @@
+- 08:30 started (branch phase-6/f2-docs off origin/main); reading ADR-0082/0083, writing demo-script and runbook
+- 08:50 demo-script, runbook, deploy-guard done locally; writing scripts/check_links.py + test; FINDING: /api/health guard_ok=false while guard /health 200
+- 09:10 check_links.py + test done, README fixed, lint/mypy/pytest green (498 passed); committing and pushing
+- 09:15 done: pushed phase-6/f2-docs, final report next

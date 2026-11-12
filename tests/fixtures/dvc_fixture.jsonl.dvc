@@ -1,0 +1,5 @@
+outs:
+- md5: 2105229fbc8e06b92e60c5887f2d0907
+  size: 32
+  hash: md5
+  path: dvc_fixture.jsonl

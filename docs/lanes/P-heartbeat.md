@@ -1,0 +1,2 @@
+- 05:34 UTC: repro tags + rollback timing committed; full-request latency run in progress
+- 05:55 UTC: all four P tasks measured/committed; notes + ADR draft written

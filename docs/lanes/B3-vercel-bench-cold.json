@@ -1,0 +1,42 @@
+{
+  "url": "https://breachlab-guard.vercel.app",
+  "started": "2026-11-01T07:10:39Z",
+  "cold": [
+    {
+      "status": 200,
+      "rtt_ms": 1060.7753849999426,
+      "cold": false,
+      "boot_s": 8.622,
+      "server_wall_ms": 656.3,
+      "model_ms": 653.3800259999225,
+      "label": "SAFE",
+      "idle_s": 120,
+      "instance_age_s": 1254.6815333366394,
+      "served": 627,
+      "fetch": {
+        "small_s": 0.5114017240000006,
+        "onnx_s": 3.3538570229999998,
+        "onnx_mb": 433.069622,
+        "onnx_mb_per_s": 129.1258449689732
+      }
+    },
+    {
+      "status": 200,
+      "rtt_ms": 12836.720736999268,
+      "cold": true,
+      "boot_s": 9.701,
+      "server_wall_ms": 10396.1,
+      "model_ms": 690.6462540000007,
+      "label": "SAFE",
+      "idle_s": 600,
+      "instance_age_s": 10.674800157546997,
+      "served": 2,
+      "fetch": {
+        "small_s": 0.6650852799999996,
+        "onnx_s": 3.6078930639999998,
+        "onnx_mb": 433.069622,
+        "onnx_mb_per_s": 120.03394067335917
+      }
+    }
+  ]
+}

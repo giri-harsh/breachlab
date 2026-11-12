@@ -1,0 +1,13 @@
+name: linkcheck
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 5 * * 1"
+jobs:
+  links:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv sync --all-groups --python 3.11
+      - run: uv run python scripts/link_check.py

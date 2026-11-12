@@ -1,0 +1,26 @@
+models:
+- Qwen/Qwen3-0.6B
+- Qwen/Qwen3-1.7B
+verbalizers:
+  safe:
+    word: safe
+    form: bare
+    id: 18675
+  injection:
+    word: inject
+    form: bare
+    id: 32133
+  jailbreak:
+    word: persona
+    form: bare
+    id: 70594
+  exfiltration:
+    word: extract
+    form: bare
+    id: 23493
+identical_across_models: true
+max_tokens:
+  input_guard: 512
+  output_filter: 384
+threshold: null
+temperature: null

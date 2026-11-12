@@ -1,0 +1,13 @@
+{
+ "source": "champion int4 q4b32 val logits (docs/lanes/A3-int4-calibration.json recipe), temperature 1.41157",
+ "val_attacks": 1048,
+ "val_benign": 1099,
+ "rule": "threshold = 25th percentile of attack p_unsafe on val",
+ "threshold": 0.996458,
+ "applied": 0.9965,
+ "val_asr_at_applied": "25.0%",
+ "val_fpr_at_applied": "0.00%",
+ "l4_threshold": 0.23195,
+ "l4_val_asr": "0.48%",
+ "l4_val_fpr": "1.91%"
+}

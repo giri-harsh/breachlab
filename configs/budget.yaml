@@ -1,0 +1,3 @@
+per_job_usd_max: 25
+monthly_usd_max: 150
+always_warm_hours: "10:00-24:00 Asia/Kolkata"

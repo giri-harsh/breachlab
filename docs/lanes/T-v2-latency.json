@@ -1,0 +1,8 @@
+{
+ "n": 120,
+ "model_ms_p50": 721.766486999968,
+ "model_ms_p95": 2062.6564690001032,
+ "roundtrip_ms_p50": 871.851921081543,
+ "roundtrip_ms_p95": 2252.124547958374,
+ "note": "guard v2, concurrency 1, warm, 120 random val rows, 2026-11-12; model_ms is the service-side latency_ms"
+}

@@ -1,0 +1,19 @@
+name: rollback
+on:
+  workflow_dispatch:
+env:
+  MLFLOW_TRACKING_URI: ${{ secrets.MLFLOW_TRACKING_URI }}
+  MLFLOW_TRACKING_USERNAME: ${{ secrets.MLFLOW_TRACKING_USERNAME }}
+  MLFLOW_TRACKING_PASSWORD: ${{ secrets.MLFLOW_TRACKING_PASSWORD }}
+jobs:
+  rollback:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv sync --all-groups --python 3.11
+      - name: move champion back to previous (the gateway polls the alias every 30 s)
+        run: |
+          start=$(date +%s)
+          uv run python -m breachlab.flywheel.registry rollback
+          echo "rollback workflow seconds: $(( $(date +%s) - start ))"

@@ -1,0 +1,3 @@
+- 08:00 resumed (lane E3 started; nothing built yet)
+- 08:04 canary guard probe + tests + docs/keep-warm.md written; running lint/type/tests
+- 08:07 done: dispatch run 41287474991 on this branch concluded success but the canary step was skipped (secrets missing); one live GET /vercel-info confirmed no auth, no boot_s key, x-guard-boot-s header present

@@ -1,0 +1,38 @@
+# PRD 7.4 — one config per run; override with BREACHLAB_TRAIN_<FIELD> env vars (nested via __)
+base_model: Qwen/Qwen3-0.6B
+seed: 0
+data_version: v1
+data_dir: /kaggle/input/breachlab-data-v1   # directory holding train.jsonl, val.jsonl, mining_pool.jsonl
+output_dir: /kaggle/working/out
+max_len: 512
+sft:
+  epochs: 3
+  lr: 2.0e-4
+  scheduler: cosine
+  warmup_ratio: 0.03
+  effective_batch: 32
+  per_device_batch: 4
+  early_stop_patience: 1
+  precision: fp16          # bf16 on Ada/Ampere, fp16 on T4
+  lora:
+    r: 16
+    alpha: 32
+    dropout: 0.05
+    target_modules: [q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj]
+mining:
+  pool_size: 5000
+  near_miss_margin: 0.2
+dpo:
+  beta: 0.1
+  epochs: 1
+  lr: 5.0e-6
+  per_device_batch: 4
+  grad_accum: 8
+calibration:
+  ece_bins: 15
+  max_fpr: 0.02
+budget:
+  gpu_usd_per_hour: 0.0   # Kaggle T4 is free quota; Modal L4 ~0.80, A10G ~1.10
+  per_job_usd_max: 25
+mlflow_experiment: breachlab-train
+hf_namespace: Pseudo-Harsh   # the HF_TOKEN account; giri-harsh namespace is not writable (ADR-0031)

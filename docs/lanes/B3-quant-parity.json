@@ -1,0 +1,201 @@
+{
+  "source": "/kaggle/input/notebooks/giriharsh/breachlab-export4-sftkv/out/export-sft-0.6b-s0",
+  "temperature": 1.4115724021135456,
+  "threshold": 0.06332372686360212,
+  "n_rows": 1500,
+  "n_attacks": 682,
+  "auroc_max_drop": 0.002,
+  "variants": {
+    "q4b32": {
+      "spec": {
+        "name": "q4b32",
+        "bits": 4,
+        "block": 32,
+        "embed": "int8",
+        "accuracy_level": null,
+        "ship": true,
+        "sym": true,
+        "algo": "rtn",
+        "down_bits": null
+      },
+      "fp32_matmuls_kept": [
+        "/MatMul"
+      ],
+      "embedding_int8": {
+        "max_abs_weight_error": 0.0012514609843492508,
+        "rows": 151936.0,
+        "dim": 1024.0
+      },
+      "quantize_s": 4.883634193000034,
+      "bytes": 433069622,
+      "probe_bytes_1thread": {
+        "file": "guard-q4b32.onnx",
+        "mode": "bytes",
+        "threads": 1,
+        "read_s": 0.2679976160000024,
+        "ort_load_s": 4.962445728000148,
+        "rss_peak_after_read_mb": 460.6796875,
+        "rss_peak_after_load_mb": 1336.09765625,
+        "rss_peak_end_mb": 1336.09765625,
+        "n_requests": 40,
+        "model_p50_ms": 515.4605330001232,
+        "model_p95_ms": 1595.899579550041,
+        "model_mean_ms": 697.8472033499884
+      },
+      "probe_path_1thread": {
+        "file": "guard-q4b32.onnx",
+        "mode": "path",
+        "threads": 1,
+        "read_s": 8.590000106778461e-07,
+        "ort_load_s": 4.787182211999834,
+        "rss_peak_after_read_mb": 47.71875,
+        "rss_peak_after_load_mb": 727.6171875,
+        "rss_peak_end_mb": 739.453125,
+        "n_requests": 40,
+        "model_p50_ms": 520.2746759999854,
+        "model_p95_ms": 1616.1220113999204,
+        "model_mean_ms": 696.6420279499914
+      },
+      "score_wall_s": 933.4212317019999,
+      "max_abs_logit_diff": 5.716165542602539,
+      "parity": {
+        "n": 1500,
+        "n_benign": 818,
+        "n_attack": 682,
+        "auroc_torch": 0.9992507295528038,
+        "auroc_variant": 0.9989549649025948,
+        "fpr_torch": 0.01589242053789731,
+        "fpr_variant": 0.07701711491442542,
+        "asr_torch": 0.004398826979472141,
+        "asr_variant": 0.001466275659824047,
+        "label_agreement": 0.9653333333333334,
+        "max_abs_logit_diff": 5.716165542602539,
+        "ok": false
+      },
+      "fp32_fpr_ci95": [
+        0.01589242053789731,
+        0.008557457212713936,
+        0.02567237163814181
+      ],
+      "fp32_asr_ci95": [
+        0.004398826979472141,
+        0.0,
+        0.010263929618768328
+      ],
+      "category_argmax_agreement": 0.9706666666666667,
+      "verdict": {
+        "auroc_drop": 0.0002957646502089739,
+        "auroc_drop_ok": true,
+        "fpr_in_fp32_ci": false,
+        "asr_in_fp32_ci": true,
+        "adr0057_ok": false,
+        "pass": false
+      }
+    },
+    "q4m8d": {
+      "spec": {
+        "name": "q4m8d",
+        "bits": 4,
+        "block": 32,
+        "embed": "int8",
+        "accuracy_level": null,
+        "ship": true,
+        "sym": true,
+        "algo": "rtn",
+        "down_bits": 8
+      },
+      "fp32_matmuls_kept": [
+        "/MatMul"
+      ],
+      "embedding_int8": {
+        "max_abs_weight_error": 0.0012514609843492508,
+        "rows": 151936.0,
+        "dim": 1024.0
+      },
+      "down_proj_matmuls": 28,
+      "quantize_s": 5.333724923999853,
+      "bytes": 477109870,
+      "probe_bytes_1thread": {
+        "file": "guard-q4m8d.onnx",
+        "mode": "bytes",
+        "threads": 1,
+        "read_s": 0.30382494200011934,
+        "ort_load_s": 4.929262464999738,
+        "rss_peak_after_read_mb": 502.28515625,
+        "rss_peak_after_load_mb": 1461.76953125,
+        "rss_peak_end_mb": 1461.76953125,
+        "n_requests": 40,
+        "model_p50_ms": 843.9748895000321,
+        "model_p95_ms": 1884.5210067500598,
+        "model_mean_ms": 1017.8654174749681
+      },
+      "probe_path_1thread": {
+        "file": "guard-q4m8d.onnx",
+        "mode": "path",
+        "threads": 1,
+        "read_s": 7.339999683608767e-07,
+        "ort_load_s": 4.748822738999934,
+        "rss_peak_after_read_mb": 47.41796875,
+        "rss_peak_after_load_mb": 732.07421875,
+        "rss_peak_end_mb": 759.6484375,
+        "n_requests": 40,
+        "model_p50_ms": 834.8279510000793,
+        "model_p95_ms": 1892.5381747497563,
+        "model_mean_ms": 1006.0802036750032
+      },
+      "score_wall_s": 1119.324555282,
+      "max_abs_logit_diff": 4.712772369384766,
+      "parity": {
+        "n": 1500,
+        "n_benign": 818,
+        "n_attack": 682,
+        "auroc_torch": 0.9992507295528038,
+        "auroc_variant": 0.9992202568312671,
+        "fpr_torch": 0.01589242053789731,
+        "fpr_variant": 0.06601466992665037,
+        "asr_torch": 0.004398826979472141,
+        "asr_variant": 0.001466275659824047,
+        "label_agreement": 0.9713333333333334,
+        "max_abs_logit_diff": 4.712772369384766,
+        "ok": false
+      },
+      "fp32_fpr_ci95": [
+        0.01589242053789731,
+        0.008557457212713936,
+        0.02567237163814181
+      ],
+      "fp32_asr_ci95": [
+        0.004398826979472141,
+        0.0,
+        0.010263929618768328
+      ],
+      "category_argmax_agreement": 0.962,
+      "verdict": {
+        "auroc_drop": 3.0472721536667358e-05,
+        "auroc_drop_ok": true,
+        "fpr_in_fp32_ci": false,
+        "asr_in_fp32_ci": true,
+        "adr0057_ok": false,
+        "pass": false
+      }
+    }
+  },
+  "reference": {
+    "wall_s": 903.9589933909999,
+    "bytes": 2384187392,
+    "probe_1thread": {
+      "file": "guard-kv.onnx",
+      "mode": "path",
+      "threads": 1,
+      "read_s": 4.890000582236098e-07,
+      "ort_load_s": 6.20058410799993,
+      "rss_peak_after_read_mb": 47.1953125,
+      "rss_peak_after_load_mb": 1904.18359375,
+      "rss_peak_end_mb": 1928.9765625,
+      "n_requests": 40,
+      "model_p50_ms": 461.2225455000498,
+      "model_p95_ms": 1550.0305226499104,
+      "model_mean_ms": 637.3847584249972
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+ "base": "https://breachlab-api.vercel.app",
+ "level": 4,
+ "warm_first": false,
+ "typing_s": 8.0,
+ "session_s": 8.19,
+ "send_to_answer_s": 19.65,
+ "statuses": [
+  200
+ ],
+ "final_status": 200,
+ "blocked": false,
+ "guard_version": "sft-0.6b-s0",
+ "measured_at": "2026-11-01T11:56:00Z"
+}

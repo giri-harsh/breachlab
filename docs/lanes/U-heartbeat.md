@@ -1,0 +1,4 @@
+- 05:30 started: branch phase-8/u from phase-8/arcade, read contracts/design/web
+- 05:58 arcade UI built; arcade.spec 24/24 green; next: old specs, screenshots, lighthouse
+- 06:03 old specs ported, 62 pass; screenshots written; next: lighthouse + U.md
+- 06:15 done: 64 pass, lighthouse perf 96-99 a11y 100, U.md written

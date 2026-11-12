@@ -1,0 +1,103 @@
+{
+  "source": "service-path quality from the bench quality block (space_app under uvicorn, Kaggle CPU kernels breachlab-export4-bench3 / -bench4), all 1500 gold_test rows clipped to 500 chars like the gateway, fp32 prefix-KV graph of the champion SFT adapter, shipping T=1.4115724 / threshold=0.0633237. Reference rung 512 = kv in bench3. No new run was made (orchestrator decision); the unclipped-text mode and bootstrap intervals of breachlab.serve.trunc_eval were not run.",
+  "n_rows": 1500,
+  "tolerance": {
+    "auroc": 0.002,
+    "fpr_pp": 0.5
+  },
+  "rungs": {
+    "512": {
+      "spec": "kv",
+      "auroc": 0.9992507295528038,
+      "fpr": 0.01589242053789731,
+      "asr": 0.004398826979472141,
+      "f1": 0.9883551673944688,
+      "category_accuracy": 0.8674521354933726,
+      "hard_benign_fpr": 0.0,
+      "d_auroc": 0.0,
+      "d_fpr_pp": 0.0,
+      "d_asr_pp": 0.0,
+      "d_category_accuracy_pp": 0.0,
+      "keeps_parity": true,
+      "c1_model_p50_ms": 442.6019624999924,
+      "c1_model_p95_ms": 2325.782202050089,
+      "bench": "b3"
+    },
+    "256": {
+      "spec": "kv@256",
+      "auroc": 0.9992507295528038,
+      "fpr": 0.01589242053789731,
+      "asr": 0.004398826979472141,
+      "f1": 0.9883551673944688,
+      "category_accuracy": 0.8674521354933726,
+      "hard_benign_fpr": 0.0,
+      "d_auroc": 0.0,
+      "d_fpr_pp": 0.0,
+      "d_asr_pp": 0.0,
+      "d_category_accuracy_pp": 0.0,
+      "keeps_parity": true,
+      "c1_model_p50_ms": 440.0776270001643,
+      "c1_model_p95_ms": 2342.5888452000663,
+      "bench": "b3"
+    },
+    "128": {
+      "spec": "kv@128",
+      "auroc": 0.999254314578867,
+      "fpr": 0.01589242053789731,
+      "asr": 0.004398826979472141,
+      "f1": 0.9883551673944688,
+      "category_accuracy": 0.8556701030927835,
+      "hard_benign_fpr": 0.0,
+      "d_auroc": 3.585026063235297e-06,
+      "d_fpr_pp": 0.0,
+      "d_asr_pp": 0.0,
+      "d_category_accuracy_pp": -1.178203240058917,
+      "keeps_parity": true,
+      "c1_model_p50_ms": 456.7053945002044,
+      "c1_model_p95_ms": 1279.2821010993066,
+      "bench": "b3"
+    },
+    "96": {
+      "spec": "kv@96",
+      "auroc": 0.9992507295528038,
+      "fpr": 0.017114914425427872,
+      "asr": 0.004398826979472141,
+      "f1": 0.9876363636363638,
+      "category_accuracy": 0.8527245949926362,
+      "hard_benign_fpr": 0.0,
+      "d_auroc": 0.0,
+      "d_fpr_pp": 0.1222493887530561,
+      "d_asr_pp": 0.0,
+      "d_category_accuracy_pp": -1.4727540500736436,
+      "keeps_parity": true,
+      "c1_model_p50_ms": 569.2081985000073,
+      "c1_model_p95_ms": 2266.2190122500347,
+      "bench": "b4"
+    },
+    "64": {
+      "spec": "kv@64",
+      "auroc": 0.9992220493442987,
+      "fpr": 0.019559902200488997,
+      "asr": 0.002932551319648094,
+      "f1": 0.9869375907111756,
+      "category_accuracy": 0.8308823529411765,
+      "hard_benign_fpr": 0.0,
+      "d_auroc": -2.868020850510522e-05,
+      "d_fpr_pp": 0.3667481662591687,
+      "d_asr_pp": -0.14662756598240473,
+      "d_category_accuracy_pp": -3.6569782552196117,
+      "keeps_parity": true,
+      "c1_model_p50_ms": 394.7587244999795,
+      "c1_model_p95_ms": 622.0344560500962,
+      "bench": "b4"
+    }
+  },
+  "parity_rungs": [
+    512,
+    256,
+    128,
+    96,
+    64
+  ],
+  "shortest_parity_rung": 64
+}

@@ -1,0 +1,38 @@
+{
+ "measured_at": "2026-11-12T05:30:01Z",
+ "requests": 100,
+ "vault_calls": 45,
+ "vault_call_share": 0.45,
+ "vault_tokens": {
+  "source": "estimated: chars / 4 (the API does not expose Groq usage); input includes the level system prompt; hidden reasoning tokens of gpt-oss are not visible, so output is a lower bound",
+  "input_per_vault_call_mean": 53.1,
+  "output_per_vault_call_mean": 163.6,
+  "per_1k_requests": {
+   "input": 23900,
+   "output": 73620
+  }
+ },
+ "guard_cpu_seconds": {
+  "source": "upper bound: server-side latency_ms of guard-blocked requests (guard call + DB, no vault); the API does not expose the guard's own latency_ms. Every L4 request calls the input guard once.",
+  "per_request_mean": 3.229,
+  "per_1k_requests": 3228.7
+ },
+ "actual_bill_usd": 0.0,
+ "actual_bill_note": "Groq free tier, Vercel Hobby (guard + API), Neon free; $0 budget (ADR-0037)",
+ "usd_list_price": {
+  "vault_groq_gpt_oss_20b": {
+   "source_url": "https://console.groq.com/docs/models",
+   "fetched": "2026-11-12",
+   "note": "groq.com/pricing renders client-side and showed no prices to a plain fetch; the provider's official models page lists 'PRICE PER 1M TOKENS' for openai/gpt-oss-20b",
+   "usd_per_1m_input": 0.075,
+   "usd_per_1m_output": 0.3,
+   "usd_per_1k_requests_estimated": 0.0239,
+   "usd_per_1k_requests_input": 0.0018,
+   "usd_per_1k_requests_output": 0.0221,
+   "caveat": "tokens are chars/4 estimates and exclude hidden reasoning tokens, so this is a lower bound; fallback models (used only if Groq rate-limits) price differently"
+  },
+  "guard_cpu": "not priced (Vercel Hobby; no per-CPU-second list price fetched)"
+ },
+ "source_run": "docs/lanes/P-full-request.json",
+ "vault_model": "openai/gpt-oss-20b (first of AGENT_MODELS; fallbacks only on rate limit)"
+}

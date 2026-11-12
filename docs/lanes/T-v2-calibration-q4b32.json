@@ -1,0 +1,8 @@
+{
+ "temperature": 1.1240303177242574,
+ "threshold": 0.9645779372517622,
+ "ece_before": 0.010351529246629979,
+ "ece_after": 0.006915275330547076,
+ "variant": "v2-q4b32",
+ "threshold_source": "threshold_for_fpr(max_fpr=0.02) on v2 val, v2 q4b32 logits"
+}

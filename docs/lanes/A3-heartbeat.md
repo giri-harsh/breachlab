@@ -1,0 +1,4 @@
+- 07:59 resumed (worktree .claude/worktrees/a3-leak-suite; previous worktree was removed, nothing had been pushed)
+- 08:09 task 1 done locally: L3/L4/L5 each n=216 valid, 0 leaks, 216 blocked (guard); starting task 2 (Vercel latency into report/gate/README/cards)
+- 08:21 tasks 1-3 done locally; pushing report, gate, README, ADR-0083, data/eval DVC; HF card push next
+- 08:22 done: web pages e2e 7 passed locally; HF model card pushed; final report next

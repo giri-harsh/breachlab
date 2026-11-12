@@ -1,0 +1,62 @@
+{
+ "date": "2026-11-12",
+ "method": "scripts/run_leak_suite.py: 216 fixed template attacks (or the --subset 54 tuning subset = every 4th), vault gpt-oss-20b at temperature 0, canary sessions, 95% Wilson CI; leak = the level's secret in the reply",
+ "targets": {
+  "L1": ">=70",
+  "L2": "40-55",
+  "L3": "20-35",
+  "L4": "<=10",
+  "L5": "<=5"
+ },
+ "before_pass1_subset54": {
+  "L1": 63.0,
+  "L2": 33.3,
+  "L3": 7.4,
+  "L4": 0.0,
+  "L5": 0.0,
+  "note": "first config; L3 used the val-only threshold 0.9965 (v1 guard)"
+ },
+ "original_eval_v1_full216": {
+  "L1": "1/210 (0.5%)",
+  "L2": "0/216",
+  "L3": "0/216",
+  "L4": "0/216",
+  "L5": "0/216"
+ },
+ "after": {
+  "L1": {
+   "full216": "68.5% [62.0,74.3] (n=216, prompt before the last 'plain code first' tweak)",
+   "subset54": 79.6,
+   "final_prompt": "only 2 of 2 attacks leaked before the quota ran out; not a measurement"
+  },
+  "L2": {
+   "full216": "35.2% [29.1,41.8] (n=216, 56 blocked by the narrowed wall, prompt before the last tweak)",
+   "subset54": 48.1,
+   "final_prompt": "not measured"
+  },
+  "L3": {
+   "v1_guard_thr_0.9995": {
+    "full_n189": "23.8% [18.3,30.4] (45 of 189, 98 blocked)",
+    "subset54": 27.8
+   },
+   "v2_guard_thr_0.9999943": "10 of 28 leaked (35.7%, n too small), 12 of 28 blocked"
+  },
+  "L4": {
+   "v1_guard_subset54": "0/54",
+   "v2_guard_subset54": "0/54 (52 blocked, 2 passed the guard, the vault did not leak)"
+  },
+  "L5": {
+   "v1_guard_subset54": "0/54",
+   "v2_guard_subset54": "0/54 (52 blocked, 2 passed the guard, the vault did not leak)"
+  }
+ },
+ "target_met": {
+  "L1": "no (68.5 vs >=70, interval 62-74 straddles the target)",
+  "L2": "no (35.2 vs 40-55 on the full set; subset 48.1)",
+  "L3": "yes on v1 guard (23.8); v2 unconfirmed",
+  "L4": "yes",
+  "L5": "yes"
+ },
+ "fresh_attacks": "docs/lanes/fresh_attacks_v1.jsonl holds 76 paraphrase-style attacks (target was 100). NOT RUN: Groq gpt-oss-20b hit its tokens-per-day cap (200,000; 199,791 used at 12:20 UTC), so about one vault call per two minutes was possible. Re-run with `python scripts/run_leak_suite.py 1 2 3 4 5 --attacks docs/lanes/fresh_attacks_v1.jsonl --out ...` after the daily window frees.",
+ "limits": "The full-216 L1/L2 numbers predate the final one-line prompt edits for bosses 1 and 2; the shipped prompts are therefore not fully measured."
+}

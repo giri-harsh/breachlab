@@ -1,0 +1,30 @@
+name: model-gate
+# Blocking eval gate (PRD 9.5) for PRs that change a model's evidence or the training code. Separate from ci.yml.
+# Make it required with the branch-protection command in docs/blockers.md (context name: `gate`).
+on:
+  pull_request:
+    paths:
+      - reports/gate-input.json
+      - web/public/scorecard.json
+      - configs/gate.yaml
+      - src/breachlab/train/**
+permissions:
+  contents: read
+concurrency:
+  group: model-gate-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv sync --all-groups --python 3.11
+      - name: gate input exists
+        run: |
+          test -s reports/gate-input.json || { echo "reports/gate-input.json missing (a model PR must ship its gate input)"; exit 1; }
+      - name: eval gate (blocking; thresholds from configs/gate.yaml, incl. p95_latency_ms_max)
+        run: uv run python scripts/eval_gate.py reports/gate-input.json
+      - name: scorecard numbers match the README
+        run: uv run python scripts/check_readme_numbers.py

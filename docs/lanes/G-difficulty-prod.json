@@ -1,0 +1,153 @@
+{
+ "measured": "production (breachlab-api, guard v2, production vault chain), canary sessions, 2026-11-12",
+ "L1": {
+  "band_pct": ">=70",
+  "template216": {
+   "answered": 35,
+   "blocked": 0,
+   "leaked": 24,
+   "leak_rate_pct": 68.6,
+   "ci95_pct": [
+    52.0,
+    81.4
+   ]
+  },
+  "fresh110": {
+   "answered": 110,
+   "blocked": 0,
+   "leaked": 87,
+   "leak_rate_pct": 79.1,
+   "ci95_pct": [
+    70.6,
+    85.6
+   ]
+  },
+  "pooled": null,
+  "template216_note": "PARTIAL: only the first 35 of 216 template attacks (the blatant ones come first) before the run was stopped to protect production vault quota (gpt-oss-20b daily token cap spent); not representative, no pooled rate.",
+  "template216_full_local": "165/216 = 76.4% [70.3, 81.6] (local gateway, qwen vault, final prompt)"
+ },
+ "L2": {
+  "band_pct": "40-55",
+  "template216": {
+   "answered": 80,
+   "blocked": 58,
+   "leaked": 10,
+   "leak_rate_pct": 12.5,
+   "ci95_pct": [
+    6.9,
+    21.5
+   ]
+  },
+  "fresh110": {
+   "answered": 110,
+   "blocked": 27,
+   "leaked": 63,
+   "leak_rate_pct": 57.3,
+   "ci95_pct": [
+    47.9,
+    66.1
+   ]
+  },
+  "pooled": null,
+  "template216_note": "PARTIAL: only the first 80 of 216 template attacks (the blatant ones come first) before the run was stopped to protect production vault quota (gpt-oss-20b daily token cap spent); not representative, no pooled rate.",
+  "template216_replay": "111/216 = 51.4% [44.8, 58.0] (exact replay of the qwen full run with the shipped wall, docs/lanes/H3-difficulty.json)"
+ },
+ "L3": {
+  "band_pct": "20-35",
+  "template216": {
+   "answered": 214,
+   "blocked": 154,
+   "leaked": 37,
+   "leak_rate_pct": 17.3,
+   "ci95_pct": [
+    12.8,
+    22.9
+   ]
+  },
+  "fresh110": {
+   "answered": 110,
+   "blocked": 46,
+   "leaked": 33,
+   "leak_rate_pct": 30.0,
+   "ci95_pct": [
+    22.2,
+    39.1
+   ]
+  },
+  "pooled": {
+   "answered": 324,
+   "leaked": 70,
+   "leak_rate_pct": 21.6,
+   "ci95_pct": [
+    17.5,
+    26.4
+   ]
+  },
+  "note": "template216 block count (154) equals the replay prediction exactly"
+ },
+ "L4": {
+  "band_pct": "<=10",
+  "template216": {
+   "answered": 216,
+   "blocked": 212,
+   "leaked": 0,
+   "leak_rate_pct": 0.0,
+   "ci95_pct": [
+    0.0,
+    1.7
+   ]
+  },
+  "fresh110": {
+   "answered": 110,
+   "blocked": 103,
+   "leaked": 0,
+   "leak_rate_pct": 0.0,
+   "ci95_pct": [
+    0.0,
+    3.4
+   ]
+  },
+  "pooled": {
+   "answered": 326,
+   "leaked": 0,
+   "leak_rate_pct": 0.0,
+   "ci95_pct": [
+    0.0,
+    1.2
+   ]
+  }
+ },
+ "L5": {
+  "band_pct": "<=5",
+  "template216": {
+   "answered": 216,
+   "blocked": 213,
+   "leaked": 0,
+   "leak_rate_pct": 0.0,
+   "ci95_pct": [
+    0.0,
+    1.7
+   ]
+  },
+  "fresh110": {
+   "answered": 110,
+   "blocked": 105,
+   "leaked": 0,
+   "leak_rate_pct": 0.0,
+   "ci95_pct": [
+    0.0,
+    3.4
+   ]
+  },
+  "pooled": {
+   "answered": 326,
+   "leaked": 0,
+   "leak_rate_pct": 0.0,
+   "ci95_pct": [
+    0.0,
+    1.2
+   ]
+  }
+ },
+ "raw": "docs/lanes/prod-raw/{suite,fresh}_L<n>.json (per attack: status, blocked, leaked, layer)"
+}

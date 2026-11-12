@@ -1,0 +1,6 @@
+outs:
+- md5: 6b89004a18e6afff46e1a9ca7542b9ae.dir
+  size: 1049607
+  nfiles: 8
+  hash: md5
+  path: neon-20261112

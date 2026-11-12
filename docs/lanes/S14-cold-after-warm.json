@@ -1,0 +1,27 @@
+{
+ "base": "https://breachlab-api.vercel.app",
+ "level": 4,
+ "warm_first": true,
+ "typing_s": 8.0,
+ "session_s": 9.18,
+ "warm_answer": {
+  "status": 200,
+  "body": {
+   "status": "warm",
+   "guards": {
+    "champion": {
+     "status": "warm",
+     "ms": 12415
+    }
+   }
+  }
+ },
+ "send_to_answer_s": 8.4,
+ "statuses": [
+  200
+ ],
+ "final_status": 200,
+ "blocked": false,
+ "guard_version": "v1",
+ "measured_at": "2026-11-11T06:50:18Z"
+}

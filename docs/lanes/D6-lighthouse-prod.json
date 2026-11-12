@@ -1,0 +1,26 @@
+{
+ "date": "2026-11-12",
+ "url": "https://breachlab-web.vercel.app",
+ "build": "97f551d (batch deploy)",
+ "tool": "lighthouse 12.8.2, mobile defaults, headless chromium via the sandbox proxy",
+ "pages": {
+  "home": {
+   "performance": 98,
+   "accessibility": 100,
+   "best-practices": 96,
+   "seo": 100
+  },
+  "leaderboard": {
+   "performance": 89,
+   "accessibility": 100,
+   "best-practices": 96,
+   "seo": 100
+  },
+  "play": {
+   "performance": 99,
+   "accessibility": 100,
+   "best-practices": 96,
+   "seo": 100
+  }
+ }
+}

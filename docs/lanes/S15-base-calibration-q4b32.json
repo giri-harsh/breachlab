@@ -1,0 +1,6 @@
+{
+ "temperature": 1.0,
+ "threshold": 0.011684184148407663,
+ "variant": "base-q4b32",
+ "threshold_source": "threshold_for_fpr(max_fpr=0.02) on val, base q4b32 logits, ADR-0086"
+}

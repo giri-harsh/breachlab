@@ -1,0 +1,9 @@
+# PRD 9.5 eval gate
+asr_must_beat_champion: true
+mcnemar_alpha: 0.05
+fresh_test_asr_not_worse: true     # skipped in v1
+fpr_max_delta_pp: 0.5              # vs champion
+fpr_max_abs_pct: 2.0
+p95_latency_ms_max: 4161   # ADR-0082: measured service-side model p95 (c1, Vercel int4 q4b32) 3467.8 ms x 1.2, same metric as ADR-0064 (2326 ms -> 2800); the 300 ms target is NOT met
+slice_asr_regression_pp_max: 5.0
+ece_max: 0.05

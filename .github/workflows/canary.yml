@@ -1,0 +1,76 @@
+name: canary
+# Hourly keep-warm + canary (ADR-0041, ADR draft E2-canary-degraded-mode). Tier 1 probes levels 1-2 (no guard host needed); tier 2 runs the 20
+# PRD probes at level 4 only when the guard answers. Guard offline in the known state (no guard host yet, ADR-0063)
+# is a DEGRADED run: green, with a notice, canary_degraded_total=1 and guard_up=0. Any real failure is red.
+# With no signing secret the job prints exactly which secrets are missing and stays green (it costs ~10 s).
+on:
+  schedule:
+    - cron: "17 * * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: canary
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  canary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      PYTHONUNBUFFERED: "1"
+      BASE_URL: ${{ vars.BASE_URL || 'https://breachlab-api.vercel.app' }}
+      GUARD_URL: ${{ secrets.GUARD_URL || vars.GUARD_URL }}
+      CANARY_REQUIRE_GUARD: ${{ vars.CANARY_REQUIRE_GUARD }}
+      ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+      GATEWAY_SECRET_KEY: ${{ secrets.GATEWAY_SECRET_KEY }}
+      GRAFANA_OTLP_ENDPOINT: ${{ secrets.GRAFANA_OTLP_ENDPOINT }}
+      GRAFANA_OTLP_INSTANCE_ID: ${{ secrets.GRAFANA_OTLP_INSTANCE_ID }}
+      GRAFANA_OTLP_TOKEN: ${{ secrets.GRAFANA_OTLP_TOKEN }}
+    steps:
+      - name: check secrets
+        id: gate
+        # Only variable NAMES are printed, never values.
+        run: |
+          optional=""
+          for v in GUARD_URL GRAFANA_OTLP_ENDPOINT GRAFANA_OTLP_INSTANCE_ID GRAFANA_OTLP_TOKEN; do
+            if [ -z "${!v:-}" ]; then optional="${optional:+$optional, }$v"; fi
+          done
+          fix="export the value(s) in a shell where gh is logged in, then run: scripts/set_gh_secrets.sh"
+          if [ -z "$ADMIN_PASSWORD" ] && [ -z "$GATEWAY_SECRET_KEY" ]; then
+            msg="canary SKIPPED (run stays green). Missing required secret: ADMIN_PASSWORD or GATEWAY_SECRET_KEY (either one signs the canary header)."
+            [ -n "$optional" ] && msg="$msg Also unset (optional): $optional."
+            msg="$msg Fix: $fix"
+            echo "::notice title=canary skipped::$msg"
+            {
+              echo "## Canary: SKIPPED (no signing secret)"
+              echo
+              echo "| missing | kind |"
+              echo "|---|---|"
+              echo "| \`ADMIN_PASSWORD\` or \`GATEWAY_SECRET_KEY\` | required (either one) |"
+              for v in ${optional//,/}; do echo "| \`$v\` | optional |"; done
+              echo
+              echo "Fix: $fix"
+            } >> "$GITHUB_STEP_SUMMARY"
+            echo "run=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "run=true" >> "$GITHUB_OUTPUT"
+            if [ -n "$optional" ]; then
+              echo "::notice title=canary optional config::unset (optional): $optional. Without GRAFANA_OTLP_* no metrics are pushed; without GUARD_URL the guard host is not health-checked (the level-4 probe still decides). Fix: $fix"
+            fi
+          fi
+      - uses: actions/checkout@v4
+        if: steps.gate.outputs.run == 'true'
+      - uses: astral-sh/setup-uv@v5
+        if: steps.gate.outputs.run == 'true'
+        with:
+          enable-cache: true
+      - name: install runtime dependencies only
+        if: steps.gate.outputs.run == 'true'
+        run: uv sync --no-dev --python 3.11
+      - name: canary
+        if: steps.gate.outputs.run == 'true'
+        timeout-minutes: 8
+        run: uv run --no-sync python -m breachlab.monitor.canary

@@ -1,0 +1,60 @@
+{
+ "measured_at": "2026-11-12T05:33:14Z",
+ "tracking_host": "dagshub.com",
+ "model": "breachlab-guard-rollback-test",
+ "versions": {
+  "base": "1",
+  "target": "2"
+ },
+ "setup_s": 11.65,
+ "reps": 3,
+ "cycles": [
+  {
+   "promote_s": 0.641,
+   "promote_wall_with_readback_s": 0.776,
+   "rollback_s": 1.948,
+   "rollback_wall_with_readback_s": 2.931,
+   "cycle_wall_s": 3.707
+  },
+  {
+   "promote_s": 2.989,
+   "promote_wall_with_readback_s": 3.128,
+   "rollback_s": 4.877,
+   "rollback_wall_with_readback_s": 5.854,
+   "cycle_wall_s": 8.982
+  },
+  {
+   "promote_s": 3.158,
+   "promote_wall_with_readback_s": 3.307,
+   "rollback_s": 5.704,
+   "rollback_wall_with_readback_s": 5.829,
+   "cycle_wall_s": 9.136
+  }
+ ],
+ "summary": {
+  "promote_s": {
+   "min": 0.641,
+   "median": 2.989,
+   "max": 3.158
+  },
+  "rollback_s": {
+   "min": 1.948,
+   "median": 4.877,
+   "max": 5.704
+  },
+  "rollback_wall_with_readback_s": {
+   "min": 2.931,
+   "median": 5.829,
+   "max": 5.854
+  },
+  "cycle_wall_s": {
+   "min": 3.707,
+   "median": 8.982,
+   "max": 9.136
+  },
+  "alias_move_budget_s": 60.0,
+  "alias_move_within_budget": true
+ },
+ "note": "Alias move only (registry). Production takes effect when the gateway re-reads the alias (poll interval) and, on the Vercel guard, only if the served ONNX file changes (runbook).",
+ "command": "uv run python scripts/p_rollback_timing.py"
+}

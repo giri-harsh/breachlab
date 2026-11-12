@@ -1,0 +1,17 @@
+seed: 42
+bootstrap_resamples: 1000
+ci_level: 0.95
+ece_bins: 15
+mcnemar_exact_max_discordant: 25   # exact binomial at or below this, chi-square (continuity-corrected) above
+slices: [attack_family, language, encoding, length_bucket, source]
+latency:
+  requests: 500
+  concurrency: [1, 4]
+comparison_rows:
+  - regex
+  - qwen3-0.6b-zeroshot
+  - deberta-prompt-injection
+  - llama-guard
+  - frontier-judge
+  - qwen3-1.7b-finetuned
+  - qwen3-0.6b-finetuned

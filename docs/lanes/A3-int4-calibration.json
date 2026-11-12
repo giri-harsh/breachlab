@@ -1,0 +1,9 @@
+{
+ "temperature": 1.4115724021135456,
+ "threshold": 0.23195423503546223,
+ "ece_before": 0.023357663504222276,
+ "ece_after": 0.00874459139558154,
+ "variant": "q4b32",
+ "threshold_fp32": 0.06332372686360212,
+ "threshold_source": "threshold_for_fpr(max_fpr=0.02) on val, q4b32 logits, ADR-0082"
+}
