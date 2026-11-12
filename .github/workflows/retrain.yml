@@ -8,6 +8,7 @@ on:
         required: true
 jobs:
   retrain:
+    if: ${{ vars.ACTIONS_ENABLED == 'true' }}  # off until the GitHub account billing lock is fixed (ADR-0103)
     runs-on: ubuntu-latest
     env:
       KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_API_TOKEN }}

@@ -5,6 +5,7 @@ on:
     - cron: "17 5 * * 1"
 jobs:
   links:
+    if: ${{ vars.ACTIONS_ENABLED == 'true' }}  # off until the GitHub account billing lock is fixed (ADR-0103)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
