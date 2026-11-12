@@ -29,3 +29,4 @@
 - RESOLVED 2026-11-12 (ADR-0095): prod DB migration 0002 applied after a DVC-tracked data backup.
 - MOVED TO v2 WORK 2026-11-12 (D8): review of the 393 gold rows with disagreeing labels. Not a v1 blocker, no longer listed as one.
 - OPEN, needs Harsh: repo visibility (docs/pre-public-audit.md verdict FIX_FIRST; he decides once it reads SAFE) and the Hugging Face licence.
+- OPEN 2026-11-12 (ADR-0100 addendum): GitHub account billing lock. Actions jobs fail at once ("your account is locked due to a billing issue") on the public repo too. Needs Harsh: fix billing in GitHub settings; then re-run workflow ci on giri-harsh/breachlab and switch the merge gate from the local gate to Actions.

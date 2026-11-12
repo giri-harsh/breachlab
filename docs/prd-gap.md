@@ -40,7 +40,7 @@ Checked against `main` at 97f551d and production (web/api 97f551d, guard v2 `cha
 | MLflow aliases, promote/rollback workflows, shadow hook, review queue, retraining doc | DONE | `flywheel/registry.py`, `.github/workflows/{promote,rollback}.yml`, `docs/retraining.md` |
 | Shadow mode meaningful in prod | PARTIAL | challenger alias falls back to the champion on the Vercel host (ADR-0082) |
 | Rollback tested once, timing recorded | DONE (P) | promote median 2.99 s, rollback 4.88 s (`docs/lanes/P-rollback-timing.json`); runbook corrected |
-| Gate on every PR | PARTIAL / HARSH | gate script passes locally; CI cannot run (Actions billing locked) |
+| Gate on every PR | PARTIAL / HARSH | gate script passes locally; Actions fails at once on the public repo too (GitHub ACCOUNT billing lock, annotation on run 43290994939) |
 | Langfuse full trace | DONE | progress.md 2026-10-30: 6 observations for one message |
 | Grafana dashboards as code / provisioned | PARTIAL / HARSH (ADR-0042) | JSON in `dashboards/`, no API token |
 | Alerts to Discord | DEFERRED (ADR-0025) | |
