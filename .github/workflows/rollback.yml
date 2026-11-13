@@ -7,13 +7,35 @@ env:
   MLFLOW_TRACKING_PASSWORD: ${{ secrets.MLFLOW_TRACKING_PASSWORD }}
 jobs:
   rollback:
-    if: ${{ vars.ACTIONS_ENABLED == 'true' }}  # off until the GitHub account billing lock is fixed (ADR-0103)
+    if: ${{ vars.ACTIONS_BILLING_OK == 'true' }}  # set to true only when GitHub billing works; the account lock fails every job (ADR-0103)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v5
-      - run: uv sync --all-groups --python 3.11
-      - name: move champion back to previous (the gateway polls the alias every 30 s)
+      - name: check secrets
+        id: gate
+        env:
+          MLFLOW_TRACKING_URI: ${{ secrets.MLFLOW_TRACKING_URI }}
+          MLFLOW_TRACKING_USERNAME: ${{ secrets.MLFLOW_TRACKING_USERNAME }}
+          MLFLOW_TRACKING_PASSWORD: ${{ secrets.MLFLOW_TRACKING_PASSWORD }}
+        # Only variable NAMES are printed, never values. A missing secret SKIPS the job (green), it never fails.
+        run: |
+          missing=""
+          for v in MLFLOW_TRACKING_URI MLFLOW_TRACKING_USERNAME MLFLOW_TRACKING_PASSWORD; do
+            if [ -z "${!v:-}" ]; then missing="${missing:+$missing, }$v"; fi
+          done
+          if [ -n "$missing" ]; then
+            echo "::notice title=rollback skipped::missing secret(s): $missing. Set them with scripts/set_gh_secrets.sh"
+            echo "run=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          fi
+      - if: steps.gate.outputs.run == 'true'
+        uses: actions/checkout@v4
+      - if: steps.gate.outputs.run == 'true'
+        uses: astral-sh/setup-uv@v5
+      - if: steps.gate.outputs.run == 'true'
+        run: uv sync --all-groups --python 3.11
+      - if: steps.gate.outputs.run == 'true'
+        name: move champion back to previous (the gateway polls the alias every 30 s)
         run: |
           start=$(date +%s)
           uv run python -m breachlab.flywheel.registry rollback

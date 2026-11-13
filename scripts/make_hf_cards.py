@@ -5,11 +5,11 @@ Numbers come only from files in the repository: ``web/public/scorecard.json`` (m
 the shipped rung) and ``DATASET_CARD.md`` (split counts). If one of them cannot be parsed the script stops instead
 of writing a card with a missing or invented number.
 
-Both repos are created or kept PRIVATE; this script never changes visibility (a public release is an irreversible
-action for the owner, see docs/blockers.md). No model weights are uploaded from this machine.
+This script never changes visibility of an existing repo (new repos are created private); visibility is set by
+``scripts/hf_publish.py``. No model weights are uploaded from this machine.
 
   uv run python scripts/make_hf_cards.py --dry-run   # write the cards to reports/hf-cards/ and print nothing else
-  uv run python scripts/make_hf_cards.py             # push README.md to the two private HF repos (needs HF_TOKEN)
+  uv run python scripts/make_hf_cards.py             # push README.md to the two HF repos (needs HF_TOKEN)
 """
 
 from __future__ import annotations
@@ -237,12 +237,12 @@ the target.
 
 ## Training data
 
-`{NS}/breachlab-data` (private for now), {f["total_rows"]:,} rows in total: train {sp.get("train", "n/a"):,}, val
+`{NS}/breachlab-data` (public, CC-BY-SA-3.0), {f["total_rows"]:,} rows in total: train {sp.get("train", "n/a"):,}, val
 {sp.get("val", "n/a"):,}, mining pool {sp.get("mining_pool", "n/a"):,} (only for hard-negative mining), gold_test
 {sp.get("gold_test", "n/a"):,} (never trained on). Public-source seeds plus LLM- and rule-generated mutations
 (paraphrase, roleplay, multi-turn, base64, hex, rot13, leetspeak, payload splitting, Hindi, Hinglish) and generated
 hard-benign prompts. Splits are grouped by parent so mutations of one seed never straddle train and test; near-duplicate
-leakage is checked. No live player data. Source licenses:
+leakage is checked. No live player data. Code and evaluation: https://github.com/giri-harsh/breachlab. Source licenses:
 
 {LICENSES}
 
@@ -296,6 +296,8 @@ sources (toxic-chat, Alpaca) were dropped (ADR-0013).
 
 {LICENSES}
 
+Code, evaluation and the game: https://github.com/giri-harsh/breachlab
+
 **License of this dataset: CC-BY-SA-3.0.** The dolly rows are CC-BY-SA-3.0 and carry share-alike, so the combined dataset is
 released under CC-BY-SA-3.0; keep attribution for the MIT and Apache sources. LLM-generated rows are subject to the
 generating providers' terms. Code and model weights are Apache-2.0 (`DATA_LICENSE.md` in the code repository).
@@ -347,7 +349,7 @@ def main(argv: list[str] | None = None) -> int:
         repo_id=data_repo,
         repo_type="dataset",
     )
-    print("cards pushed (README.md only, repos stay private):", repo, data_repo)
+    print("cards pushed (README.md only, visibility untouched):", repo, data_repo)
     return 0
 
 

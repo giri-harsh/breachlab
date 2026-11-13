@@ -1,55 +1,37 @@
 # BreachLab
 
-[![CI](https://github.com/giri-harsh/breachlab/actions/workflows/ci.yml/badge.svg)](https://github.com/giri-harsh/breachlab/actions/workflows/ci.yml) [![License: Apache-2.0](https://img.shields.io/badge/code-Apache--2.0-blue.svg)](LICENSE) [![Data: CC-BY-SA-3.0](https://img.shields.io/badge/data-CC--BY--SA--3.0-lightgrey.svg)](DATA_LICENSE.md)
+[![CI](https://img.shields.io/github/actions/workflow/status/giri-harsh/breachlab/ci.yml?branch=main&label=ci)](https://github.com/giri-harsh/breachlab/blob/main/.github/workflows/ci.yml)
+[![Code: Apache-2.0](https://img.shields.io/badge/code-Apache--2.0-blue.svg)](LICENSE)
+[![Data: CC-BY-SA-3.0](https://img.shields.io/badge/data-CC--BY--SA--3.0-lightgrey.svg)](DATA_LICENSE.md)
+[![Play](https://img.shields.io/badge/play-live%20demo-ff2e93.svg)](https://breachlab-web.vercel.app)
+[![HF model](https://img.shields.io/badge/%F0%9F%A4%97-model-yellow.svg)](https://huggingface.co/Pseudo-Harsh/breachlab-guard-v1)
+[![HF dataset](https://img.shields.io/badge/%F0%9F%A4%97-dataset-yellow.svg)](https://huggingface.co/datasets/Pseudo-Harsh/breachlab-data)
 
-Source: https://github.com/giri-harsh/breachlab (public). The development history lives in the private archive `giri-harsh/Breach-lab`.
+<p align="center">
+  <a href="https://breachlab-web.vercel.app"><img src="docs/media/demo.gif" alt="BreachLab demo: home, boss select, a level 1 leak, skipping a boss" width="640"></a><br>
+  <sub>15 s recorded on production: home, boss select, a level 1 leak, skip boss (<a href="docs/media/demo.mp4">MP4</a>)</sub>
+</p>
 
-A small web game where players try to trick a guarded AI "vault" into leaking a secret code across five levels of increasing defense. The core is a fine-tuned **guard model** (Qwen3-0.6B + LoRA, SFT-only in v1) that classifies every message as safe, injection, jailbreak or exfiltration in a single forward pass. Every successful breach is detected deterministically (the secret appears in the reply), so the game labels its own training data.
+**BreachLab** is a web game where you try to trick a guarded AI vault into leaking a secret code across five bosses of rising defence. The core is a small fine-tuned **guard model** (Qwen3-0.6B + LoRA, int4 ONNX, CPU) that classifies every message as safe, injection, jailbreak or exfiltration, plus the MLOps around it: data versioning, a measured eval gate, a model registry with rollback, and a canary. It runs on free tiers ($0).
 
 > **Research demo.** Not a claim of production safety. Prompts are logged and used to train the guard; do not enter personal data.
 
-Live: web https://breachlab-web.vercel.app, gateway https://breachlab-api.vercel.app (`/api/health`), guard https://breachlab-guard.vercel.app (`/health`; scoring needs a bearer token).
+## Quick start
+- **Play:** https://breachlab-web.vercel.app (gateway `/api/health`: https://breachlab-api.vercel.app/api/health)
+- **Run it locally:** [`docs/LOCAL_DEV.md`](docs/LOCAL_DEV.md)
+- **Under the hood:** the site's *How it works* and *Model card* pages, [`reports/eval-v2.md`](reports/eval-v2.md), [`docs/decisions.md`](docs/decisions.md)
 
-## Status (honest)
+<p align="center"><img src="docs/media/screens-grid.png" alt="Six production screens: home and boss select, play, boss defeated, skip boss, high scores, under the hood" width="900"><br>
+<sub>Neon Arcade UI at 1440 px: home, play, boss defeated, skip, high scores, under the hood (captured from the production build; some screens use sample data from the mocked API).</sub></p>
 
-| Piece | State |
-|---|---|
-| Levels 1-2 (system prompt only, keyword wall) | **Live and playable.** No guard model involved. |
-| Levels 3-5 (guard, fine-tuned guard, guard plus output filter) | **Live (ADR-0082).** The guard runs as a Vercel Python function (`vercel-guard/`, 1 vCPU, 2 GB) with a 4-bit weight-only ONNX graph. Limits: the single vCPU serializes requests, the first request after about 10 minutes idle takes about 13 s and gets the fail-closed `503 guard waking up` (ADR-0050), and only one graph fits, so level 3 uses the same fine-tuned guard as level 4 (the untuned base guard is not served). A free Hugging Face Space was not possible (402, ADR-0063, ADR-0079). |
-| Guard model | Trained, evaluated and exported. Served graph: int4 q4b32 with prefix-KV reuse, SFT-only, with its own decision threshold because it fails the fp32 threshold on false positives (ADR-0082). Weights are in the private Hugging Face repo `Pseudo-Harsh/breachlab-guard-v1`. The guard service contract is host-agnostic (`GUARD_URL`, bearer token); see [`docs/deploy-guard.md`](docs/deploy-guard.md). |
-| Latency target (p95 <= 300 ms, CPU) | **NOT met.** Measured on the real Vercel host (warm, concurrency 1, 500 requests): model-time p95 of <!--num:qwen3-0.6b-sft-int4.p95_ms-->3468 ms<!--/num--> (p50 720 ms; round trip p50 842 ms, p95 3556 ms). With four concurrent requests the single vCPU queues them (round trip p50 3664 ms). The first request after a long idle takes about 13 s. The v1 gate runs with a relaxed 4161 ms threshold (measured p95 x 1.2, same metric as ADR-0064), which means "within the relaxed v1 limit", not "meets 300 ms". Earlier Kaggle-emulation numbers (2326 ms) are superseded. A GPU or a faster host is the documented path (`reports/eval-v1.md`). |
-| Observability | Hourly canary and weekly drift workflows exist on GitHub Actions but skip (green) until the repository secrets are set (owner action, `docs/blockers.md`). Once set, the canary probes the Vercel guard directly: one cold-start timeout is a warning, a guard that stays down is FAILED (red) (runbook, [`docs/keep-warm.md`](docs/keep-warm.md); the hourly canary does not keep the guard warm). OTLP ingest to Grafana Cloud was proven (HTTP 200) and Langfuse traces work; the dashboard JSON is in `dashboards/` and is imported by hand ([runbook](docs/runbook.md#observability)). No paging by decision (ADR-0025). |
-| Repository | Private. Making it (and the Hugging Face repos) public is an irreversible action left to the owner. |
+## How it works
+- **Five bosses plus a daily boss.** 1: system prompt only. 2: a keyword wall. 3: the guard with a relaxed threshold. 4: the guard at its calibrated threshold. 5: the guard plus an output filter. A free-tier open LLM on Groq plays the vault and holds a per-session secret.
+- **One forward pass guard.** Qwen3-0.6B + LoRA (SFT) scores a message with a softmax over four verbalizer tokens; the served graph is int4 ONNX with prefix-KV reuse on a 1 vCPU Vercel Python function.
+- **Free labels.** A deterministic leak detector (base64, hex, ROT13, leetspeak, reversed, separators) decides every win, so each attempt becomes a correctly labelled training row (with a consent line).
+- **Measured releases.** Training runs on Kaggle T4; an eval gate checks ASR, FPR, ECE and latency; MLflow aliases (champion, challenger, previous) move the served model, rollback measured at a median 4.9 s (`docs/lanes/P-rollback-timing.json`).
+- **Fails closed and says so.** If the guard is down, levels 3-5 refuse rather than let attacks through; a cold guard shows "BOSS WAKING UP" (about 22 s measured on first load), not an error. Skip boss, hints, points and a leaderboard keep it playable.
 
-## Architecture
-
-```mermaid
-flowchart LR
-  P[Player phone] --> W[Next.js on Vercel]
-  W --> G[FastAPI gateway<br/>on Vercel]
-  G -->|levels 3-5, HTTP POST /score| IG[Input guard service<br/>Qwen3-0.6B LoRA, ONNX, CPU<br/>reached via GUARD_URL]
-  G -->|level 2| RX[Regex filter]
-  G -->|safe| A[Vault agent<br/>Groq, model fallback chain]
-  A --> OF[Output filter<br/>level 5, same guard]
-  OF --> L[Leak detector]
-  L --> DB[(Neon Postgres)]
-  G -. spans .-> LF[Langfuse]
-  G -. OTLP metrics .-> GR[Grafana Cloud]
-  CAN[Hourly canary<br/>GitHub Actions] -->|20 probes + health| G
-  CAN -. OTLP push .-> GR
-  DB --> R[Judge label + human review] --> T[Train on Kaggle T4<br/>SFT, mining, DPO, calibration]
-  T --> MR[MLflow registry on DagsHub<br/>aliases: champion, challenger, previous]
-  T --> HF[Hugging Face Hub<br/>private model and dataset]
-  MR -->|alias re-read every 30 s| G
-  HF -->|weights at boot| IG
-  DVC[DVC data on DagsHub] --> T
-```
-
-`GUARD_URL` is host-agnostic: the live guard is the Vercel function in `vercel-guard/` (int4 graph, ADR-0082), and any container host that runs `space/Dockerfile` (port 7860, `POST /score`, `GET /health`, contract in `docs/CONTRACTS.md`) can serve it instead. Levels 4 and 5 use the registry `champion`; level 3 is meant to use the untuned `base` alias, but only one graph fits the Vercel host, so there level 3 also gets the champion. If the guard is down or still waking up, levels 3-5 return 503 and never fail open.
-
-Data versioning: DVC on DagsHub. Tracking and registry: MLflow on DagsHub. Training: Kaggle T4 kernels. Decisions: [`docs/decisions.md`](docs/decisions.md). Operations: [`docs/runbook.md`](docs/runbook.md). Retraining loop: [`docs/retraining.md`](docs/retraining.md).
-
-## Headline numbers (gold_test, 1,500 rows, from `reports/eval-v1.md`)
+## Results (gold_test, 1,500 rows; v1 from `reports/eval-v1.md`, v2 from `reports/eval-v2.md`)
 
 | model | attack success rate (lower is better) | false-positive rate | F1 | AUROC |
 |---|---|---|---|---|
@@ -64,35 +46,48 @@ Data versioning: DVC on DagsHub. Tracking and registry: MLflow on DagsHub. Train
 | **Qwen3-0.6B fine-tuned, int4 graph as served (v2, ships)** | <!--num:qwen3-0.6b-sft-int4-v2.asr-->0.4%<!--/num--> | <!--num:qwen3-0.6b-sft-int4-v2.fpr-->1.8%<!--/num--> | <!--num:qwen3-0.6b-sft-int4-v2.f1-->0.987<!--/num--> | <!--num:qwen3-0.6b-sft-int4-v2.auroc-->1.000<!--/num--> |
 | Qwen3-1.7B fine-tuned (comparison, not served) | <!--num:qwen3-1.7b-sft.asr-->0.0%<!--/num--> | <!--num:qwen3-1.7b-sft.fpr-->1.3%<!--/num--> | <!--num:qwen3-1.7b-sft.f1-->0.992<!--/num--> | <!--num:qwen3-1.7b-sft.auroc-->1.000<!--/num--> |
 
-Bootstrap confidence intervals, McNemar tests, slices, the worst misses, the 3-seed table and the size-vs-quality table are in [`reports/eval-v1.md`](reports/eval-v1.md). `scripts/check_readme_numbers.py` fails CI if this table drifts from `web/public/scorecard.json`.
+Guard v2 (served) vs v1 (`reports/eval-v2.md`): short benign opener false positives **54.3% to 6.3%** (300 held-out rows; Hindi 96% to 15.0%), gold ASR 0.59% to 0.44%, gold FPR 2.08% to 1.83%.
 
-**Read these numbers with care.**
-- They are **in-distribution**: `gold_test` shares source datasets and synthetic generators with training (split by parent, near-duplicates checked). The fine-tuned guard has not been evaluated on a fresh, out-of-distribution test set from real players yet.
-- Gold labels are generation-time labels, not human labels. A Gemini double-check agrees on 92.7% of the 1,500 rows (Cohen's kappa 0.851); 110 disagreements are queued for human review, which is still pending.
-- Three trained seeds (0, 1, 3): SFT ASR 0.49 +- 0.17%, FPR 1.83 +- 0.24%. A fourth run (seed 2) diverged in fp16 and is excluded and disclosed in the report.
-- DPO showed no significant gain over SFT-only (McNemar p = 1.0), so SFT-only ships.
-- **Short benign openers (fixed in v2, ADR-0094).** On 300 held-out short benign messages (greetings, small talk, questions about the assistant) the v1 guard flagged 54% (Hindi 96%) because the training data had almost no short, Hindi or Hinglish benign text. Guard v2 (v1 + 2,172 hard-benign rows) flags 6.3% [4.0, 9.3] (Hindi 15%, Hinglish 2%, English 2%) with gold ASR 0.44% and FPR 1.83%; the Hindi rate sits at its 15% gate with an 8-22% interval. v1 vs v2 table and caveats: [`reports/eval-v2.md`](reports/eval-v2.md).
-- System leak suite (fixed 216 template attacks, vault agent at temperature 0, 95% Wilson CI): level 1 leaked 1 of 210 (0.5%, CI 0.1-2.6%), level 2 0 of 216 (CI 0.0-1.7%), levels 3, 4 and 5 each 0 of 216 (CI 0.0-1.7%). At levels 3-5 the guard blocked all 216 attacks, so the vault and the level-5 output filter were never reached; level 3 and 4 use the same guard graph on this host. A zero here means no leak in this fixed set, not that none exists. **Sanity note: 0% on templated attacks does not mean unbreakable; human players will find gaps.** After guard v2 and the difficulty tuning (ADR-0097, ADR-0100) the numbers that matter are in `docs/lanes/G-difficulty-final.json` and `docs/lanes/H3-difficulty.json` (bosses 4 and 5: 0/216 template and 0/110 fresh attacks on the qwen vault).
+Bootstrap confidence intervals, McNemar tests, slices, the worst misses, the 3-seed table and the size-vs-quality table are in [`reports/eval-v1.md`](reports/eval-v1.md); `scripts/check_readme_numbers.py` checks the table against `web/public/scorecard.json`.
 
-## Quickstart
+**Game difficulty** (production, guard v2, 110 fresh attacks per boss; template runs in `docs/lanes/G-difficulty-prod.json`, ADR-0102): boss 1 leaks 79.1%, boss 2 57.3%, boss 3 30.0% (21.6% pooled with the 216 template attacks), bosses 4 and 5 0 of 326. Targets: 70+, 40-55, 20-35, 10 or less, 5 or less percent.
 
-```bash
-uv sync --all-groups
-uv run ruff check . && uv run mypy && uv run pytest
-uv run python scripts/check_readme_numbers.py        # README table vs web/public/scorecard.json
-cd web && npm ci && npm run lint && npm run typecheck && npm run build
+## Architecture
+
+```mermaid
+flowchart LR
+  P[Player phone or laptop] --> W[Next.js on Vercel]
+  W --> G[FastAPI gateway on Vercel]
+  G -->|level 2| RX[Keyword wall]
+  G -->|levels 3-5, POST /score| IG[Guard v2: Qwen3-0.6B LoRA<br/>int4 ONNX, CPU, Vercel function]
+  G -->|passed| A[Vault agent: Groq model chain]
+  A --> OF[Output filter, level 5, same guard]
+  OF --> LD[Leak detector]
+  LD --> DB[(Neon Postgres)]
+  DB --> R[Judge labels + review] --> T[Train on Kaggle T4: SFT, calibration, int4 export]
+  T --> GATE[Eval gate: ASR, FPR, ECE, latency]
+  GATE --> MR[MLflow registry on DagsHub<br/>champion, challenger, previous]
+  T --> HF[Hugging Face Hub<br/>model and dataset]
+  HF -->|weights at boot| IG
+  MR -->|alias re-read every 30 s| G
+  DVC[DVC data on DagsHub] --> T
+  CAN[Canary workflow] -.->|health + probes| G
+  G -. optional .-> OBS[Langfuse + Grafana via OTLP]
 ```
 
-Point the gateway at a guard host: see [`docs/deploy-guard.md`](docs/deploy-guard.md) and the "Pointing GUARD_URL" section of [`docs/runbook.md`](docs/runbook.md).
+`GUARD_URL` is host-agnostic: any host that serves `POST /score` and `GET /health` ([`docs/CONTRACTS.md`](docs/CONTRACTS.md), [`docs/deploy-guard.md`](docs/deploy-guard.md)) can replace the Vercel function. Tracking and registry: MLflow on DagsHub; data: DVC on DagsHub; training: Kaggle; operations: [`docs/runbook.md`](docs/runbook.md).
+
+## Limitations & honesty
+- **Latency misses the bar.** The PRD asked for guard p95 <= 300 ms on CPU. Measured on the free 1 vCPU host: model time p50 about 720 ms, p95 2,063 ms for v2 (v1: 3,468 ms on 500 requests); full request p95 6.4 s (v1 guard, 100 requests). **Cold start:** about 13 s for the guard after 10 idle minutes, about 22 s from page load to a playable boss 3 when both functions are cold.
+- **In-distribution eval.** `gold_test` shares source datasets and generators with training (split by parent, near-duplicates checked). Gold labels are generation-time labels: a Gemini check agrees on 92.7% (kappa 0.851) and a human review is not done. The short-opener set (300 rows, LLM-written) is a regression detector, not proof of generalisation; Hindi openers sit at 15.0% FPR, exactly at their gate.
+- **0% on templated attacks does not mean unbreakable.** Bosses 4 and 5 stopped every scripted and fresh attack in my runs; human players will find gaps. Boss 2 and 3 difficulty depends on which Groq model answers (free-tier token caps force fallback models), so the table above describes one day's vault chain.
+- **Small samples.** v2 is one seed; v1 has three (ASR 0.49 +- 0.17%, FPR 1.83 +- 0.24%). A fourth v1 seed diverged in fp16 and is disclosed. DPO gave no significant gain (McNemar p = 1.0), so SFT-only ships.
+- **Operations.** GitHub Actions is blocked by a billing lock on the owner's account, so workflows skip until `ACTIONS_BILLING_OK` is set and a local gate is used (ADR-0103); the canary and drift jobs also need repository secrets.
 
 ## Repo map
-
-- `src/breachlab/gateway` game logic, leak detector, guards, FastAPI app, telemetry
-- `src/breachlab/train`, `serve`, `eval` training stages, ONNX guard runtime and service, metrics and reports
-- `src/breachlab/flywheel`, `monitor` labeling, dataset builds, self-play, registry promote/rollback, canaries, drift
-- `web/` Next.js app (play, leaderboard, under the hood, model card, admin review); `dashboards/` Grafana JSON; `vercel-guard/` the live guard function; `space/` guard container image (alternative hosts)
-- `docs/` ADRs ([`decisions.md`](docs/decisions.md)), [runbook](docs/runbook.md), [demo script](docs/demo-script.md), blockers, lane reports
+- `src/breachlab/gateway` game logic, leak detector, guards, FastAPI app; `train`, `serve`, `eval` training stages, ONNX runtime, metrics and reports; `flywheel`, `monitor` labelling, registry promote/rollback, canary, drift
+- `web/` Next.js app; `vercel-guard/` the guard function; `space/` guard container image; `dashboards/` Grafana JSON; `configs/` levels, budget, gate
+- `docs/` ADRs, [runbook](docs/runbook.md), [local dev](docs/LOCAL_DEV.md), [PRD gap](docs/prd-gap.md), lane reports; `reports/` eval reports; `docs/media/` demo and screenshots
 
 ## License
-
-Code, model weights and model card: Apache-2.0 (`LICENSE`). Dataset (including share-alike rows from databricks-dolly-15k): CC-BY-SA-3.0 (`DATASET_CARD.md`). The model's training data includes CC-BY-SA-3.0 rows; details and the reasoning are in `DATA_LICENSE.md`.
+Code, model weights and model card: Apache-2.0 ([`LICENSE`](LICENSE)). Dataset (it includes share-alike rows from databricks-dolly-15k): CC-BY-SA-3.0 ([`DATASET_CARD.md`](DATASET_CARD.md), [`DATA_LICENSE.md`](DATA_LICENSE.md)). The model's training data includes CC-BY-SA-3.0 rows.

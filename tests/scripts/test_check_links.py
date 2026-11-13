@@ -27,7 +27,7 @@ def make_repo(tmp_path: Path) -> Path:
     )
     (tmp_path / "docs" / "a.md").write_text(
         "# A\n\n## Second part\n\n[up](../README.md) [bad up](../nope.md#x) "
-        "[hf](https://huggingface.co/Pseudo-Harsh/breachlab-guard-v1)\n",
+        "[hf](https://huggingface.co/spaces/Pseudo-Harsh/guard-space)\n",
         encoding="utf-8",
     )
     return tmp_path
@@ -59,7 +59,7 @@ def test_relative_links_and_anchors_offline(tmp_path: Path) -> None:
     assert rep.failed == []
     assert any("good.test" in u for u in rep.unchecked)
     assert any("github.com/giri-harsh" in u and "private, not checked" in u for u in rep.private)
-    assert any("huggingface.co/Pseudo-Harsh" in u for u in rep.private)
+    assert any("huggingface.co/spaces/Pseudo-Harsh" in u for u in rep.private)
     assert any("localhost" in u for u in rep.skipped)
 
 

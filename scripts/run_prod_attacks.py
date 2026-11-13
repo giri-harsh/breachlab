@@ -45,9 +45,7 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--out", type=Path, required=True)
     ap.add_argument("--base", default=BASE)
     a = ap.parse_args(argv)
-    texts = [
-        json.loads(x)["text"] for x in a.attacks.read_text("utf-8").split("\n") if x.strip()
-    ]
+    texts = [json.loads(x)["text"] for x in a.attacks.read_text("utf-8").split("\n") if x.strip()]
     key = gateway_key()
     res: dict[str, Any] = json.loads(a.out.read_text("utf-8")) if a.out.exists() else {}
     with httpx.Client(timeout=90.0) as c:
@@ -75,7 +73,11 @@ def main(argv: list[str] | None = None) -> int:
                         time.sleep(min(5 * (attempt + 1), 30))
                         continue
                     break
-                body = r.json() if r.headers.get("content-type", "").startswith("application/json") else {}
+                body = (
+                    r.json()
+                    if r.headers.get("content-type", "").startswith("application/json")
+                    else {}
+                )
                 done[str(i)] = {
                     "status": r.status_code,
                     "blocked": bool(body.get("blocked")),

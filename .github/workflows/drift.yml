@@ -16,7 +16,7 @@ permissions:
 
 jobs:
   drift:
-    if: ${{ vars.ACTIONS_ENABLED == 'true' }}  # off until the GitHub account billing lock is fixed (ADR-0103)
+    if: ${{ vars.ACTIONS_BILLING_OK == 'true' }}  # set to true only when GitHub billing works; the account lock fails every job (ADR-0103)
     runs-on: ubuntu-latest
     timeout-minutes: 15
     env:

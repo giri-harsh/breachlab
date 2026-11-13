@@ -8,13 +8,33 @@ on:
         required: true
 jobs:
   retrain:
-    if: ${{ vars.ACTIONS_ENABLED == 'true' }}  # off until the GitHub account billing lock is fixed (ADR-0103)
+    if: ${{ vars.ACTIONS_BILLING_OK == 'true' }}  # set to true only when GitHub billing works; the account lock fails every job (ADR-0103)
     runs-on: ubuntu-latest
     env:
       KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_API_TOKEN }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v5
-      - run: uv sync --all-groups --python 3.11
-      - name: push the training kernel (Kaggle T4; Modal when available)
+      - name: check secrets
+        id: gate
+        env:
+          KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_API_TOKEN }}
+        # Only variable NAMES are printed, never values. A missing secret SKIPS the job (green), it never fails.
+        run: |
+          missing=""
+          for v in KAGGLE_API_TOKEN; do
+            if [ -z "${!v:-}" ]; then missing="${missing:+$missing, }$v"; fi
+          done
+          if [ -n "$missing" ]; then
+            echo "::notice title=retrain skipped::missing secret(s): $missing. Set them with scripts/set_gh_secrets.sh"
+            echo "run=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          fi
+      - if: steps.gate.outputs.run == 'true'
+        uses: actions/checkout@v4
+      - if: steps.gate.outputs.run == 'true'
+        uses: astral-sh/setup-uv@v5
+      - if: steps.gate.outputs.run == 'true'
+        run: uv sync --all-groups --python 3.11
+      - if: steps.gate.outputs.run == 'true'
+        name: push the training kernel (Kaggle T4; Modal when available)
         run: uv run python -m breachlab.train.kaggle_job --data data/processed/${{ inputs.data_version }} --slug breachlab-retrain-${{ inputs.data_version }} --stage train

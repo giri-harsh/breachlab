@@ -7,8 +7,9 @@
 * https/http links (inline links, ``<autolinks>`` and bare URLs, fenced code blocks excluded) get a HEAD request with a
   timeout of 10 s and one retry on a transport error or a 5xx. A 405 means the server is there but refuses HEAD and
   counts as reachable. Anything else >= 400 is a failure and is printed with its URL and status.
-* Private repositories are never requested: ``github.com/giri-harsh/Breach-lab`` and Hugging Face ``Pseudo-Harsh``
-  repos/Spaces answer 401/404 anonymously, so they are reported as "private, not checked" instead of failing.
+* Private repositories are never requested: the archive ``github.com/giri-harsh/Breach-lab`` and any ``Pseudo-Harsh``
+  Space answer 401/404 anonymously, so they are reported as "private, not checked" instead of failing. The Hugging Face
+  model and dataset repos and ``github.com/giri-harsh/breachlab`` are public and are checked like any other link.
 * A bare base URL of our two API hosts (no route at "/") is probed through ``/api/health`` or ``/health``; Kaggle kernels
   of ``giriharsh`` are private too (``is_private=True`` in ``kaggle_job.py``).
 * Placeholders (``localhost``, ``example.*``, ``*.invalid``, ``<host>``, ``{VAR}``, ``...``) are skipped.
@@ -41,10 +42,7 @@ SKIP_HOSTS = ("localhost", "127.0.0.1", "0.0.0.0")
 PLACEHOLDER_MARKS = ("<", ">", "{", "}", "$", "...", "…")
 PRIVATE = (
     re.compile(r"^https?://github\.com/giri-harsh/Breach-lab(?:[/#?].*)?$", re.I),
-    re.compile(
-        r"^https?://(?:www\.)?huggingface\.co/(?:(?:datasets|spaces|models)/)?Pseudo-Harsh(?:/.*)?$",
-        re.I,
-    ),
+    re.compile(r"^https?://(?:www\.)?huggingface\.co/spaces/Pseudo-Harsh(?:/.*)?$", re.I),
     re.compile(r"^https?://pseudo-harsh-[^./]+\.hf\.space(?:/.*)?$", re.I),
     # Kaggle kernels are pushed with is_private=True (src/breachlab/train/kaggle_job.py): anonymous GET answers 404.
     re.compile(r"^https?://(?:www\.)?kaggle\.com/code/giriharsh/.*$", re.I),
