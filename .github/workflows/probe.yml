@@ -1,0 +1,9 @@
+name: probe
+# One-off diagnostic: does any job start on this account? (PRD gap L5)
+on:
+  workflow_dispatch:
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "runner started on $(uname -a)"
