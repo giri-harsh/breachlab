@@ -174,6 +174,14 @@ data-v2 (v1 plus 2,172 hard-benign short, Hindi and Hinglish rows). Served int4 
 validation split: gold_test ASR 0.44%, FPR 1.83%; held-out short benign opener FPR 6.3% (v1: 54.3%), Hindi openers 15.0%
 (v1: 96%). Details and caveats: `reports/eval-v2.md` in the code repository. The numbers below describe v1.
 
+## Update 2026-11-15: student cascade (`cascade-v2/`)
+
+The guard function runs a distilled student first (`cascade-v2/student-int8.onnx`, 136 MB DistilBERT int8, Apache-2.0
+base, tokenizer and `student-meta.json` alongside). A student score below 0.1337 returns SAFE, above 0.8939 returns
+UNSAFE, and the band in between goes to the 0.6B above (4.8% of production requests). On the gold set the cascade
+equals the 0.6B (ASR 0.44%, FPR 1.1%). It is weaker on new attacks: out-of-distribution ASR 9.5% (0.6B alone 6.6%,
+student alone 13.4%), fresh game attacks 14.5% (0.6B 6.4%). Details and the full table: `reports/eval-v2.md`, ADR-0105.
+
 ## Which variant ships
 
 - **SFT-only.** LoRA after supervised fine-tuning (`adapters/sft-0.6b-s0`, seed 0). A DPO stage on 399 mined hard

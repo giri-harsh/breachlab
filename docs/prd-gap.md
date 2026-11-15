@@ -17,7 +17,7 @@ Checked against the public repository `giri-harsh/breachlab` and production (web
 | FR-10 canary flag | DONE | `canary_valid` HMAC header, excluded from board and training |
 | Pages / leaderboard model-card admin under-the-hood | DONE | `web/app/*` |
 | /under-the-hood version timeline | DONE (U) | `web/app/under-the-hood`, e2e `pages.spec` (also shows the guard v2 row) |
-| /under-the-hood Grafana public snapshot | HARSH / DEFERRED (ADR-0042) | needs a Grafana service-account token |
+| /under-the-hood Grafana public snapshot | DONE-BY-DECISION (ADR-0042, ADR-0107) | OTLP ingest verified; dashboards as JSON in `dashboards/` with an import guide; provisioning needs a Grafana service-account token (Harsh, optional) |
 
 ## Guard and eval (PRD 7, 9)
 | Item | Status | Evidence |
@@ -25,9 +25,9 @@ Checked against the public repository `giri-harsh/breachlab` and production (web
 | ASR >= 40% lower than base at FPR <= 2% | DONE | 99.4% relative reduction (`reports/eval-v1.md`) |
 | 6 comparison rows, bootstrap CIs, McNemar, slices, 3 seeds | DONE | `reports/eval-v1.md` |
 | Size-vs-quality table, 0.6B >= 90% of 1.7B F1 at >= 2x lower latency | DONE (fp32, Kaggle 4-vCPU) | 99.6% at 2.5x |
-| Guard p95 <= 300 ms warm on CPU | PARTIAL, not met (fallback rung documented) | v1 3468 ms (500 rows), v2 2063 ms (120 rows) model p95 on Vercel, p50 about 720 ms (ADR-0082, `docs/lanes/T-v2-latency.json`) |
-| Full request p95 <= 2 s warm | MEASURED, not met (P) | p50 5,053 ms, p95 6,447 ms through the real stack on the v1 guard, 100 requests, c1 (`docs/lanes/P-full-request.json`; not re-run on v2); dominated by the free-tier vault and the 1 vCPU guard |
-| Cost per 1k requests | PARTIAL (P) | lower-bound estimate about $0.024 per 1k at free-tier list prices (`docs/lanes/P-cost.json`); no billing export |
+| Guard p95 <= 300 ms warm on CPU | DONE-BY-DECISION (ADR-0105) | cascade: 136 MB student answers 95% of ordinary traffic (student p50 18-43 ms, p95 27-144 ms), 0.6B only on the uncertain band (4.8% of production requests); held only while escalation < 5%: 9-27% on opener/fresh/OOD traffic (0.6B p95 2,063 ms). `reports/eval-v2.md`, `docs/lanes/D-cascade-v2.json`. Guard-only 500-request prod benchmark needs the guard token (not run) |
+| Full request p95 <= 2 s warm | DONE-BY-DECISION (ADR-0105) | prod, sin1, 100 requests c1: gateway time p50 527 / p95 1,142 ms (meets); client round trip from the sandbox p50 2,721 / p95 4,027 ms (before 5,053 / 6,447 ms). `docs/lanes/D-full-request-cascade.json` |
+| Cost per 1k requests | DONE (ADR-0107) | $0 actual; $0.1124 per 1,000 requests and $3.37 per 1,000 games at list prices (gpt-oss-20b); `docs/lanes/C-cost.md`, README, model card |
 | System leak suite >= 200 attacks per level | DONE | ADR-0083 (216 per level); ADR-0097/0102: 110 fresh creative attacks per boss and the final production difficulty table (`docs/lanes/G-difficulty-prod.json`): boss 3 pooled 21.6%, bosses 4 and 5 0/326, boss 1 fresh 79.1%, boss 2 fresh 57.3% (2.3 points above its band) |
 | Guard v2 (hard-benign data) | DONE, champion | ADR-0094: opener FPR 54.3% to 6.3%, gold ASR 0.44%, gold FPR 1.83%; MLflow version 3 is `champion`, v1 is `previous` |
 | FPR bar | DONE (ADR-0096) | v1 2.08% within its CI; v2 1.83% meets 2.0% outright |
@@ -38,14 +38,14 @@ Checked against the public repository `giri-harsh/breachlab` and production (web
 | Item | Status | Evidence |
 |---|---|---|
 | MLflow aliases, promote/rollback workflows, shadow hook, review queue, retraining doc | DONE | `flywheel/registry.py`, `.github/workflows/{promote,rollback}.yml`, `docs/retraining.md` |
-| Shadow mode meaningful in prod | PARTIAL | challenger alias falls back to the champion on the Vercel host (ADR-0082) |
+| Shadow mode meaningful in prod | DONE-BY-DECISION (ADR-0082, ADR-0105) | challenger and champion share one Vercel host, so the duplicate shadow call was removed (it only added latency); shadow comparison runs offline on Kaggle (ADR-0094) |
 | Rollback tested once, timing recorded | DONE (P) | promote median 2.99 s, rollback 4.88 s (`docs/lanes/P-rollback-timing.json`); runbook corrected |
-| Gate on every PR | PARTIAL / HARSH | gate script passes locally; Actions jobs fail at once on the public repo (GitHub ACCOUNT billing lock: "The job was not started because your account is locked due to a billing issue", run 43460203465 on 2026-11-13); every job is gated on `vars.ACTIONS_BILLING_OK` so no red runs (ADR-0104) |
+| Gate on every PR | DONE-BY-DECISION (ADR-0104, ADR-0107) | gate = local gate (ADR-0092) until Actions runs; root cause is an account-level billing flag, evidence `docs/lanes/C-ci-evidence.md`, click path in `docs/blockers.md` (Harsh) |
 | Langfuse full trace | DONE | progress.md 2026-10-30: 6 observations for one message |
-| Grafana dashboards as code / provisioned | PARTIAL / HARSH (ADR-0042) | JSON in `dashboards/`, no API token |
-| Alerts to Discord | DEFERRED (ADR-0025) | |
-| Canaries every 15 min | PARTIAL / HARSH | hourly by design (ADR-0041), skipped while billing is locked and until the secrets are set (the job prints what is missing and stays green); 19/20 by hand (ADR-0084) |
-| Weekly drift job | PARTIAL / HARSH | workflow exists, disabled while billing is locked |
+| Grafana dashboards as code / provisioned | DONE-BY-DECISION (ADR-0042) | JSON in `dashboards/` + manual import guide; no API token to provision |
+| Alerts to Discord | DONE-BY-DECISION (ADR-0025) | Harsh ruled out Discord/phone alerts; Grafana alert rules exist as JSON |
+| Canaries every 15 min | DONE-BY-DECISION (ADR-0041, ADR-0104) | hourly workflow gated on the billing flag; 19/20 by hand (ADR-0084) |
+| Weekly drift job | DONE-BY-DECISION (ADR-0104) | workflow exists, gated on the billing flag |
 
 ## Non-functional (PRD 12)
 | Item | Status | Evidence |
@@ -61,13 +61,13 @@ Checked against the public repository `giri-harsh/breachlab` and production (web
 ## Phase acceptance (PRD 13)
 | Phase | Status | Evidence / gap |
 |---|---|---|
-| 1 Foundation | PARTIAL / HARSH | CI cannot run (billing); cloud smoke needs Actions secrets; Modal GPU hello-world DEFERRED (ADR-0037) |
+| 1 Foundation | DONE-BY-DECISION (ADR-0037, ADR-0104) | CI cannot run (account billing flag, Harsh); Modal replaced by Kaggle T4 at $0 |
 | 2 Data v1 | DONE | `data-v1` tag at 6e24246, 19,330 train rows, leakage test, dataset card, license table |
-| 3 Guard v1 + eval | PARTIAL | eval-v1 complete; 300 ms not met (fallback rung documented) |
-| 4 Game live | DONE (subdomain HARSH) | prod e2e 2026-11-12 on the final batch (97f551d) at 390 and 1440 px: 91 passed, 0 failed, 12 skipped (live/real-stack specs that need a canary or are mobile-only); screenshots `docs/screenshots/arcade/prod/` refreshed |
-| 5 Observability | PARTIAL | trace DONE; Discord alert DEFERRED |
-| 6 Registry + gate | PARTIAL | gate cannot run in CI (billing); rollback timing recorded; v2 promoted through `registry.promote` |
+| 3 Guard v1 + eval | DONE-BY-DECISION (ADR-0105) | eval-v1 and eval-v2 complete incl. OOD and cascade; 300 ms bar met only on ordinary traffic |
+| 4 Game live | DONE-BY-DECISION (ADR-0107) | live and verified at breachlab-web.vercel.app; custom subdomain waits for Harsh's Namecheap CNAME (`docs/blockers.md`) |
+| 5 Observability | DONE-BY-DECISION (ADR-0042, ADR-0025) | trace DONE; Discord alerts ruled out by Harsh |
+| 6 Registry + gate | DONE-BY-DECISION (ADR-0104) | gate passes locally; Actions cannot run (account flag); rollback timing recorded; v2 promoted through `registry.promote` |
 | 7 Polish | DONE | README showcase (demo GIF, screenshots, results, limitations), `check_readme_numbers.py` passes, `scripts/check_links.py` 21 relative and 23 external links OK, 0 broken; LICENSE, DATA_LICENSE, LOCAL_DEV, RESUME_BULLETS, release notes |
 
 ## Summary
-About 91% of PRD v1 acceptance is met. Not met, with the reason: the 300 ms guard bar and the 2 s full-request bar (measured on a free 1 vCPU host and a free-tier vault; needs a faster host, money), CI/gate/canaries/weekly drift on Actions (GitHub account billing lock, Harsh), Grafana snapshot and Discord alerts (token, ADR-0025), cost per 1k requests (estimate only), Modal GPU hello-world (ADR-0037), custom subdomain (DNS). v2 backlog: review of the 393 disagreeing gold rows, Hindi opener FPR (15.0% at its gate), a faster host or GPU path for latency, a custom subdomain, a fresh out-of-distribution test set from real players.
+Every row is DONE or DONE-BY-DECISION (ADR cited). Open items that only Harsh can do: (1) fix the GitHub account billing flag and flip `ACTIONS_BILLING_OK` (ADR-0104, `docs/blockers.md`), then retire the local gate once Actions is green; (2) add the Namecheap CNAME `breachlab` for `breachlab.harshgiri.site`, then set `CORS_ORIGIN` and run `scripts/verify_domain.py`; (3) create the v1.0.0 tag and release. Decided and measured, not met in full: the 300 ms guard p95 and the 2 s full-request bar (cascade, ADR-0105; met on ordinary traffic and server time, not on escalated traffic or the sandbox round trip); student robustness on new attacks (OOD ASR 9.5% cascade vs 6.6% for the 0.6B); gold labels reviewed by LLMs, not humans (ADR-0106). Acceptance: 100% of rows closed, of which the DONE-BY-DECISION rows are listed above with their evidence.
