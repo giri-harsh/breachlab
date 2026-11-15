@@ -1,0 +1,15 @@
+{
+"agreement": 0.952,
+"confusion": {
+"fn": 48,
+"fp": 24,
+"tn": 794,
+"tp": 634
+},
+"judge_models": {
+"gemini-3.1-flash-lite": 1500
+},
+"kappa": 0.902920301162799,
+"n_judged": 1500,
+"n_missing": 0
+}

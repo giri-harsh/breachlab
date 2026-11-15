@@ -43,6 +43,10 @@ HUB_DIR = os.environ.get("GUARD_ALIAS", ALIAS)
 ONNX_FILE = os.environ.get("GUARD_ONNX_FILE", "guard-q4b32.onnx")
 # The int4 graph has its own threshold (recalibrated on val, ADR-0082); the fp32 calibration.json stays untouched.
 CALIBRATION_FILE = os.environ.get("GUARD_CALIBRATION_FILE", "calibration-q4b32.json")
+# Cascade mode (ADR-0105): a Hub folder holding the int8 student; the 0.6B teacher in HUB_DIR is then loaded lazily on the
+# first escalated request. Unset = the single-model host exactly as before.
+CASCADE_DIR = os.environ.get("GUARD_CASCADE_DIR", "")
+CASCADE_FILES = ("student-int8.onnx", "student-tokenizer.json", "student-meta.json")
 SMALL_FILES = (
     "tokenizer.json",
     "calibration.json",
@@ -56,6 +60,7 @@ CHUNK = 8 * 1024 * 1024
 _blob: bytes | None = None
 _fetch: dict[str, float] = {}
 _boot_lock = threading.Lock()
+_boot_lock_teacher = threading.Lock()
 _served = 0
 
 
@@ -97,7 +102,7 @@ def fetch_blob(client: httpx.Client, s: sa.Settings) -> bytes:
     return data
 
 
-def download(s: sa.Settings, alias: str) -> Path:
+def download_teacher(s: sa.Settings) -> Path:
     """``space_app.Download`` for a serverless host: bytes to RAM, small files to /tmp, a placeholder for the graph.
 
     ``space_app.effective_variant`` looks for ``guard-kv.onnx`` in the returned directory to pick the prefix-KV
@@ -119,7 +124,9 @@ def download(s: sa.Settings, alias: str) -> Path:
     return WORK
 
 
-def load(directory: Path, version: str, variant: str, threads: int, alias: str) -> GuardModel:
+def load_teacher_model(
+    directory: Path, version: str, variant: str, threads: int, alias: str
+) -> GuardModel:
     """``space_app.Loader``: one ORT session over the in-memory graph (prefix-KV path)."""
     global _blob
     from breachlab.common.config import ServeConfig
@@ -137,6 +144,71 @@ def load(directory: Path, version: str, variant: str, threads: int, alias: str) 
         )
     finally:
         del blob
+
+
+def download_cascade(s: sa.Settings) -> Path:
+    """Cascade mode: only the student (about 100 MB) and the teacher's ``export.json`` are fetched at boot."""
+    WORK.mkdir(parents=True, exist_ok=True)
+    (WORK / "cascade").mkdir(exist_ok=True)
+    t0 = time.perf_counter()
+    with httpx.Client(follow_redirects=True, timeout=httpx.Timeout(30.0, read=120.0)) as client:
+        fetch_small(client, s, "export.json", WORK / "export.json")
+        for name in CASCADE_FILES:
+            r = _get(client, s.repo, f"{CASCADE_DIR}/{name}", s.token)
+            try:
+                r.raise_for_status()
+                with (WORK / "cascade" / name).open("wb") as f:
+                    for chunk in r.iter_bytes(CHUNK):
+                        f.write(chunk)
+            finally:
+                r.close()
+    _fetch["student_s"] = time.perf_counter() - t0
+    (WORK / "guard-kv.onnx").write_bytes(b"")
+    return WORK
+
+
+def load_cascade(
+    directory: Path, version: str, variant: str, threads: int, alias: str
+) -> GuardModel:
+    import json
+
+    from breachlab.common.config import ServeConfig
+    from breachlab.serve.cascade import CascadeModel, CascadeParams, StudentScorer
+
+    meta = json.loads((directory / "cascade" / "student-meta.json").read_text())
+    scorer = StudentScorer(
+        str(directory / "cascade" / "student-int8.onnx"),
+        str(directory / "cascade" / "student-tokenizer.json"),
+        meta,
+        threads,
+    )
+    params = CascadeParams(
+        str(meta["version"]),
+        float(meta["temperature"]),
+        float(meta["t_low"]),
+        float(meta["t_high"]),
+    )
+
+    def teacher() -> GuardModel:
+        # first escalated request: fetch and load the 0.6B (about 10 s once per instance)
+        with _boot_lock_teacher:
+            t0 = time.perf_counter()
+            d = download_teacher(S)
+            m = load_teacher_model(d, version, "kv", threads, alias)
+            _fetch["teacher_load_s"] = time.perf_counter() - t0
+            return m
+
+    return CascadeModel(scorer, teacher, params, ServeConfig().max_tokens.model_dump())
+
+
+def download(s: sa.Settings, alias: str) -> Path:
+    return download_cascade(s) if CASCADE_DIR else download_teacher(s)
+
+
+def load(directory: Path, version: str, variant: str, threads: int, alias: str) -> GuardModel:
+    if CASCADE_DIR:
+        return load_cascade(directory, version, variant, threads, alias)
+    return load_teacher_model(directory, version, variant, threads, alias)
 
 
 def settings() -> sa.Settings:
@@ -198,6 +270,15 @@ async def lazy_boot(
     return response
 
 
+def _cascade_info() -> dict[str, Any] | None:
+    svc = STATE.service
+    model = svc.models.get("champion") if svc is not None else None
+    counts = getattr(model, "counts", None)
+    if counts is None:
+        return None
+    return {"counts": dict(counts), "escalation_rate": model.escalation_rate()}  # type: ignore[union-attr]
+
+
 @app.get("/vercel-info")
 def vercel_info() -> dict[str, Any]:
     return {
@@ -211,4 +292,5 @@ def vercel_info() -> dict[str, Any]:
         "fetch": dict(_fetch),
         "onnx_file": ONNX_FILE,
         "boot_error": STATE.boot.error,
+        "cascade": _cascade_info(),
     }

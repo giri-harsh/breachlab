@@ -1,0 +1,1802 @@
+{
+"0119f6c9b4ba6a5f": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"02650dbb35e90290": {
+"category": "exfiltration",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"05c6a6016c2bd4ff": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"05ee5e7c2e7c57af": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-2.5-flash"
+},
+"0603321803ebdca4": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"092825ff299a0c74": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"09c3748ec611f4d8": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"0b4d6a92a895f88a": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"0bbd03c400a3826f": {
+"category": "exfiltration",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"0dd1ee3c7e412075": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"0dd8ba679f499ef7": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"0dd9bf3374c2b49d": {
+"category": "exfiltration",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"0e1e5fec5ddbbce2": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-2.5-flash"
+},
+"1107f0ed8a577e53": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"11309a989b9f9a57": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"11cb53a949bd9bf7": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"11f13b2bc840a126": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"122adb83bb8c110e": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"127f8fd43328d155": {
+"category": "exfiltration",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"12d29f81e8b589d2": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"137e1384b69a3024": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"138086c987ed9f24": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"1506b2cab9816997": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"155caa502a512d72": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"16140ff97677f30e": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"18b672b980c50d65": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"1941e223ca90394a": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"19d851fb3f90bc9a": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"1b1d3624a77335bf": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-2.5-flash"
+},
+"1cc9d0fea218a2ad": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-2.5-flash"
+},
+"1e279dcaa1a5b401": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"1ec393e28bbe6e7b": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"1ec9e866bbb34e58": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"1ed4328f7ed43b34": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-2.5-flash"
+},
+"1fb343cf51466ac7": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"1fce2ef5681dee17": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"2142b64919b1cd0c": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"21875f93c41b89d1": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"21f1e6bd8e5e6b90": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-2.5-flash"
+},
+"235f1b658f57e72c": {
+"category": "exfiltration",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"243f96deb9b6af67": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"253fd04b755369c8": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"2590a91ff34f81ea": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-2.5-flash"
+},
+"26296efd2e78d8ea": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"264051ef66738fff": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"26a9873dca6677e1": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"27dafb37f01ffb87": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"27fc85e19e001db5": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"282957105a4c839e": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"2893b54c944ddfff": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-2.5-flash"
+},
+"295bbad907498223": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"29925add10cda2eb": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"29bfa5c92b15e8e2": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"2a36c95445e7a0d4": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"2a76f70c7ce26a6e": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"2b3db25b5f784300": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"2c0657d4a002bfee": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"2f41106ff94e5822": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"31870dc1339ad740": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"320175c02afbe0ff": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"32b75d57de728a2a": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-2.5-flash"
+},
+"33ad1bbdd50b0fed": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"33f25ff493784443": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"35d0cd7d5cde67a8": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-2.5-flash"
+},
+"35fd6a268f05aa3d": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"3737194a5b27a4e9": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"3743559eb0e470ea": {
+"category": "exfiltration",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"376b948e9be53dba": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"38db5aaf4e314b3a": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"39800bdd0f79f637": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-2.5-flash"
+},
+"39ea8c65bb7b7613": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"3a41ea276d28eb64": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"3a6c0dfe25f5098f": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-2.5-flash"
+},
+"3afea88f6105670d": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"3b30bb31006df445": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"3b9ed603b1e75c86": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"3bdd34ddd8e19705": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"3be85681041b07c8": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-2.5-flash"
+},
+"3cd4d7dea9a5b0ec": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-2.5-flash"
+},
+"3ce72ee657d7209b": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-2.5-flash"
+},
+"3d30ffb9e1ed07f8": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"3daebe2b68ab6e62": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"3e9781af330fcfed": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"3ecdafebcbed9a9e": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"3f7bf87168ba1ff9": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"3fef468dc9953d2d": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"40602ccdd73337f2": {
+"category": "exfiltration",
+"label": "UNSAFE",
+"model": "gemini-2.5-flash"
+},
+"40b53954fb8b7705": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"42d5e66f4ec4abf7": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"4435892389c1ae2d": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"4473711e738941ad": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"44b71292d3dca14d": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-2.5-flash"
+},
+"44d06f5d24e30509": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"46411283a7a1db9c": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"46ae8471080e8f24": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-2.5-flash"
+},
+"46e69fa66ea284e4": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"46ff918ae4dd5db1": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"4712b1cc0be0fe5b": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"47a8552993d8ddf8": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"484333416e4d1cce": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-2.5-flash"
+},
+"4901f012b46fda5f": {
+"category": "exfiltration",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"4958c0455f807c05": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-2.5-flash"
+},
+"4b3a835000137842": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"4b93066eecd6953c": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"4d7c73208705bc92": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-2.5-flash"
+},
+"4f1edbd5f43a6936": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"502313ddbbda45f8": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"5056cd6bb319bab1": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"5170599963895340": {
+"category": "exfiltration",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"51a4f74c582b1abb": {
+"category": "exfiltration",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"51a86c00a5d17da8": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"51d912f9c622955b": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"5396387910956900": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"54b2050b74846ce3": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"5573d32a78226741": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-2.5-flash"
+},
+"567889c65d5035b3": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"567caf24f7bd6e42": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"582f9a243d9592a3": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"58800f47b7c881f3": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-2.5-flash"
+},
+"58da817f468e39ff": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"5a94b51a19069dfd": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"5ae0941898bbc4c4": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"5ae45915dac8c3de": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"5b1699cdca5271c0": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"5cba2873a87e50c9": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"5d60321c81b0476c": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"5d62d6c8f7510f37": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-2.5-flash"
+},
+"5dcde94478e467c7": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"5e08088591fc4d24": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"5f068fe48fbd3ecd": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-2.5-flash"
+},
+"6223e7545b630076": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"6239fc6c05cbd892": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-2.5-flash"
+},
+"63a70af448518a7c": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"63bc642d614aab2a": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"63cc5e16a8eb78f2": {
+"category": "exfiltration",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"642711a5c1941626": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-2.5-flash"
+},
+"64d667645556ffdd": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"6574987eab77d88c": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"657dc7a3c2c65009": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-2.5-flash"
+},
+"65cb8cd22f051612": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-2.5-flash"
+},
+"6650fc8536eb4e77": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"66bd25226b194538": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"66d3ff8f2fb14799": {
+"category": "exfiltration",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"68ad9e29604ed235": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"68baac652b1474e0": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"68d87838c470d32e": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-2.5-flash"
+},
+"693122cddb5fcace": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"694e1e39492eeead": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"6b132dfc3bf767f3": {
+"category": "exfiltration",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"6b7f4b8f4360dd66": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"6bd6eeec42e2d211": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"6e16fda06b8b8f16": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"6e423d616b8118af": {
+"category": "exfiltration",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"6f04667d8cf3440b": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-2.5-flash"
+},
+"6fd9c4a87213c6e2": {
+"category": "exfiltration",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"71e7d63c7f37c281": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"728c8d7dda432939": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"7411b12b36d34c97": {
+"category": "exfiltration",
+"label": "UNSAFE",
+"model": "gemini-2.5-flash"
+},
+"74a99772ea5207b8": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"74d5e0b2b675bce7": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"75462b915eb1ac62": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-2.5-flash"
+},
+"769a5420a468c58c": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"7850713ec5890451": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"78d8282e6c55e336": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"79e78b37864acce4": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"7b25ba80ac1d24e6": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-2.5-flash"
+},
+"7b566c05ca03b8f2": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"7b5949ef5a723911": {
+"category": "exfiltration",
+"label": "UNSAFE",
+"model": "gemini-2.5-flash"
+},
+"7bd5e496896c2a01": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"7c2da3d9047bf4f7": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"7c92e3d6c7662d49": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"7d00df63644cb5a6": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-2.5-flash"
+},
+"7d77b87b02b25dfd": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"7ea0980434240530": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"7f1dac51cfc5fc28": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"7f30d3af70e50b4f": {
+"category": "exfiltration",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"806f66fc2dbc5950": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"808820616d32a4bd": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"80d7801b7e311415": {
+"category": "exfiltration",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"8121ec1bc1b7816a": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"814809f1602febcc": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-2.5-flash"
+},
+"83504fbbe1b1c2aa": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"83bdb9d3d3175b68": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"84d6cb2092459044": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"86e24310ce61a493": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"884b49b45ebd8d23": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"89067b7d61d80c67": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"89246462c66ff4e0": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"8a2a6ebb7d1b2b20": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"8addee0b1411aa4c": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"8af429af4bbf3fda": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"8b6c4ff1768fe991": {
+"category": "exfiltration",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"8b77788eb739f47c": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-2.5-flash"
+},
+"8b993b0f3dfcdef7": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-2.5-flash"
+},
+"8bcfd1122ee78357": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"8ddbfa905ffa61cf": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-2.5-flash"
+},
+"8e2b4c1a09c4c0da": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"8f2342fcc36a1dbb": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"90856b7d46007019": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"909c30255d27562c": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"92174fd67abe9fac": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"9246a7b14604a093": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"92a8578ebb88d820": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"92ddeaa046a4f124": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"93cf16fa8dbcffba": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"93ed92442b97a9e5": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"944248b288ba7ed0": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"94d46fcdde2b563d": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"95054547389d3ecc": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-2.5-flash"
+},
+"95293b17fe3d83a5": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"9625d1adac56b2e3": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-2.5-flash"
+},
+"9648460b9c776e86": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"96a92a87334126ed": {
+"category": "exfiltration",
+"label": "UNSAFE",
+"model": "gemini-2.5-flash"
+},
+"96bd2c374aab73b1": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-2.5-flash"
+},
+"97b81fa596c9d03d": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"986be0b9073c462b": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"987cefcc6a4e82ea": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"998d8934bffa6b6d": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"9a1767c1ff79ced1": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"9a89d5f44c610427": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"9b601c8f16d6c9af": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"9bbe01bac51482a3": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"9c505e6522b14f17": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-2.5-flash"
+},
+"9c61ebe0e1f63525": {
+"category": "exfiltration",
+"label": "UNSAFE",
+"model": "gemini-2.5-flash"
+},
+"9ca5f21f5d71d114": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"9e025177064d10e4": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-2.5-flash"
+},
+"9ea63f371d289a21": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-2.5-flash"
+},
+"9ecc93ea88696a6b": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-2.5-flash"
+},
+"9ed2b865f786e6e0": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"9f3c4de8be79ac9a": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-2.5-flash"
+},
+"a0f39707fb5a677f": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-2.5-flash"
+},
+"a1a3fe4ef1776f86": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-2.5-flash"
+},
+"a43a043911deea70": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-2.5-flash"
+},
+"a4b1fb0578bbb78c": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"a64454b08394f128": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"a66edfc1c7ad5e00": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-2.5-flash"
+},
+"a6832ca4adaefbb8": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"a6a955cc50f26b5d": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"a6f7dfa2e678fa5c": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-2.5-flash"
+},
+"a725af9143154652": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"a7d42d67adbc6548": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-2.5-flash"
+},
+"a869fa67850ae91e": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"a871b2f49d7e4665": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-2.5-flash"
+},
+"ab2ea7577148eb16": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"ab31c47f5a6e48ba": {
+"category": "exfiltration",
+"label": "UNSAFE",
+"model": "gemini-2.5-flash"
+},
+"ab5bce1215152318": {
+"category": "exfiltration",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"abae973f310753fe": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-2.5-flash"
+},
+"ad0c54f4744b5c48": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"ad2346755c803942": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"aed31ce3f64aafa5": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"b1ac115863ff4700": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"b24d5eb404b9f1be": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-2.5-flash"
+},
+"b27cca10954c84fc": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"b2c507eb92f0d16c": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"b3633aa767183dc9": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-2.5-flash"
+},
+"b4b3e0d8702a6e7c": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"b6188fec8759b9bc": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-2.5-flash"
+},
+"b61ffc431cda932f": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"b648ecf81d6c974a": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"b705104c96ff9788": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"b7e5d6c52297f55f": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"b822de61e7e3cfa7": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"b8828733233f2c3c": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"b95a88b2fd24b37f": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-2.5-flash"
+},
+"b9c2e51451adbcfc": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"bab3e9208fae8f31": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"baef49b94e0d0106": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-2.5-flash"
+},
+"bb37ca55dcee2d74": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"bb77895f82d6fa9c": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"bbad6bc249aabe9d": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"bbb3f55bc1d83a09": {
+"category": "exfiltration",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"bc34be57eca90e25": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-2.5-flash"
+},
+"bc78fd676c10b156": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"bdd0d32f459d16da": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-2.5-flash"
+},
+"bddd7ff172111a2f": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-2.5-flash"
+},
+"c07a577ef26e1c24": {
+"category": "exfiltration",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"c1b9995eb027d68a": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"c2ff99de50fd10e5": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"c341e6353467dea5": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"c39da0c4cb22122b": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"c4724048c06bff91": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-2.5-flash"
+},
+"c4e300d50bdafbc0": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"c508f1f99233c0a4": {
+"category": "exfiltration",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"c5c69012cecbefe6": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-2.5-flash"
+},
+"c60b94b45dbf42f5": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"c7a49a46dd8566ce": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"cae801bb5a503af7": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"caed1a8d7ea0c825": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-2.5-flash"
+},
+"cb8d3a2833fc34d2": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-2.5-flash"
+},
+"cbb8b95fe67d886b": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-2.5-flash"
+},
+"cbbf8c38d5f09c47": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"ccb66c19b28d0711": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"cccaf057eec796f5": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"cd25cfae136fc425": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"cd4256a67106bfd3": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"cdd1dfd0d47de63d": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"ceb2398591ca3c52": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"d01277038ae2db17": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"d1ed7dcac7b44e3c": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"d2015ac254d712fd": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"d2352164d3844e95": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-2.5-flash"
+},
+"d25eb40c8aa6f473": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-2.5-flash"
+},
+"d28555efe3271854": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"d2b466f93ac19dca": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"d3f50a773cfa297d": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"d70652ba4f0a4b2d": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"d7262ddf9a188026": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-2.5-flash"
+},
+"d948f006abfbf787": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"da01098b78e7b64c": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"db78f72045daab7c": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"dca733212ece2c7d": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"dd492906a7a8e79b": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-2.5-flash"
+},
+"dddf84e5596ea9d0": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-2.5-flash"
+},
+"dde3104338a1f3ce": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"de45af042ee58916": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-2.5-flash"
+},
+"de62d686b41c7ec3": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"de924e623ec25a1f": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"df62e11635301ab5": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"df785781e4602c81": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-2.5-flash"
+},
+"df9602e0653fdfee": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"dfa80e3e0b9abbe7": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"dfcc50ddb153047a": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"dfe59f014caa7c0f": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"e05dab525543d53f": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"e0c4380709f0634c": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-2.5-flash"
+},
+"e0e5ca3f9221c3d4": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"e13f7df908d534df": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-2.5-flash"
+},
+"e1846c66441eb706": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"e25a079e85fcf5b0": {
+"category": "exfiltration",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"e41fb8854f59a164": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"e69b95c7af21b24d": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-2.5-flash"
+},
+"e7ff8cf8dbb96c9e": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"e8b0ff3d3ef548c5": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-2.5-flash"
+},
+"e96d689d94384220": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"eba9b05f08ab278c": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-2.5-flash"
+},
+"ec2cf4c39489ba45": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"ec7f9990efa0cf98": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"ecb88210547e5c5b": {
+"category": "exfiltration",
+"label": "UNSAFE",
+"model": "gemini-2.5-flash"
+},
+"ecba4a02973eec93": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"ecf7f665d5388590": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"ed34da488021a85e": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"ee73542fdfa126e6": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"ee891082f9b36b8e": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"eecd9843e58d349b": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-2.5-flash"
+},
+"efddd528143f2a17": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"f1f09f1337cff077": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-2.5-flash"
+},
+"f57f6cd5a73a16a4": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"f7c4040ad82df4a0": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"f80df5f319565d69": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"f820de13292f3597": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"f8c73959f4c78350": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-2.5-flash"
+},
+"f9bb98ff045d17db": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"fad0c554ec97ee9c": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"fbf0870653524a54": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-2.5-flash"
+},
+"fc1f3cfb4a4a1e18": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"fd6cf2dc2c90a636": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"fe0b9d90b8301210": {
+"category": "none",
+"label": "SAFE",
+"model": "gemini-3-flash-preview"
+},
+"fe3fa5729c4a38fe": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-2.5-flash"
+},
+"fe6ec38a2c4df84c": {
+"category": "injection",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+},
+"ffcc3814dd7ddc4e": {
+"category": "jailbreak",
+"label": "UNSAFE",
+"model": "gemini-3-flash-preview"
+}
+}

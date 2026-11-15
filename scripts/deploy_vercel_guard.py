@@ -36,6 +36,7 @@ PLAIN = (
     "GUARD_CALIBRATION_FILE",
     "GUARD_THREADS",
     "GUARD_ALIAS",
+    "GUARD_CASCADE_DIR",
 )
 
 
@@ -114,8 +115,15 @@ def main(argv: list[str] | None = None) -> int:
         default=None,
         help="calibration JSON under <alias>/ (e.g. calibration-q4b32.json)",
     )
+    ap.add_argument(
+        "--cascade-dir",
+        default=None,
+        help="Hub folder with the int8 student: serve the student-then-0.6B cascade (ADR-0105)",
+    )
     a = ap.parse_args(argv)
     env = dict(os.environ)
+    if a.cascade_dir:
+        env["GUARD_CASCADE_DIR"] = a.cascade_dir
     if a.onnx_file:
         env["GUARD_ONNX_FILE"] = a.onnx_file
     if a.alias:

@@ -85,6 +85,9 @@ class ScoreResponse(BaseModel):
     confidence: float  # equals p_unsafe (kept for the gateway's HttpGuard)
     version: str
     latency_ms: float
+    stage: str | None = (
+        None  # cascade guard only (student | teacher | failed_closed); absent otherwise
+    )
 
 
 @dataclass(frozen=True)
@@ -344,7 +347,12 @@ def create_app(
             "error": b.error,
         }
 
-    @app.post("/score", response_model=ScoreResponse, dependencies=[Depends(authorized)])
+    @app.post(
+        "/score",
+        response_model=ScoreResponse,
+        response_model_exclude_none=True,
+        dependencies=[Depends(authorized)],
+    )
     def score(req: ScoreRequest) -> ScoreResponse:
         svc = state.service
         if svc is None:
@@ -363,6 +371,7 @@ def create_app(
             confidence=v.p_unsafe,
             version=r.version,
             latency_ms=r.latency_ms,
+            stage=r.stage,
         )
 
     return app

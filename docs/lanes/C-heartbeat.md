@@ -1,0 +1,8 @@
+- 16:38 lane C started: branch lane-C/cost-domain; read P-cost, agent.py, service.py (guard calls per msg: L3=1, L4=2 incl shadow, L5=3)
+- 16:41 Groq measurement running (40 msgs x 2 models), prices fetched: Groq/Vercel/Neon; next p_cost.py
+- 16:44 Groq usage measured (qwen 37/40 ok, gpt-oss-120b 40/40; L4/L5 12 each); next: gateway CPU local measure, p_cost.py
+- 16:47 L8: domain add POST done (see C-domain.md)
+- 16:48 L8 domain added (verified:true, CNAME needed); gateway CPU measured 12 ms/req in-process; next: p_cost.py, then verify_domain/blockers, then CI evidence
+- 16:51 L4 p_cost.py + C-cost.{json,md} done: $3.37/1k games typical (20b), Active CPU binds first; next README cost + make_hf_cards, then domain script/blockers, CI evidence
+- 16:54 L8 done (verify_domain.py, C-domain.md, links); starting L5 CI evidence
+- 16:57 L8 + L5 docs written (blockers, C-domain.md, C-ci-evidence.md, verify_domain.py)

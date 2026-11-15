@@ -52,7 +52,7 @@ def main() -> int:
     rows = [json.loads(x) for x in a.have.read_text("utf-8").split("\n") if x.strip()]
     seen = {norm(r["text"]) for r in rows}
     llm = GroqClient("qwen/qwen3.8-27b")
-    for style in STYLES:
+    for style in STYLES * 3:
         if len(rows) >= a.total:
             break
         try:

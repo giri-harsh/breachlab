@@ -65,3 +65,8 @@ def truncate_ids(ids: list[int], limit: int) -> list[int]:
         return ids
     head = limit // 2
     return ids[:head] + ids[len(ids) - (limit - head) :]
+
+
+def wrap_ids(ids: list[int], max_len: int, cls_id: int, sep_id: int) -> list[int]:
+    """[CLS] + head/tail-truncated message ids + [SEP], at most ``max_len`` ids (student input, train and serve)."""
+    return [cls_id, *truncate_ids(ids, max_len - 2), sep_id]

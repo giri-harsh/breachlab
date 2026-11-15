@@ -1,0 +1,16 @@
+{
+ "measured_at": "2026-11-13T16:48:20Z",
+ "method": "in-process TestClient, SQLite in memory, instant fake guard and agent; time.process_time (CPU)",
+ "caveat": "upper bound for the server side of SQLite and the fake guard (TestClient adds client-side work); excludes Postgres driver/TLS and cold-start imports",
+ "n": 300,
+ "post_message_cpu_ms": {
+  "mean": 14.49,
+  "p50": 13.95,
+  "p95": 18.01
+ },
+ "get_state_cpu_ms": {
+  "mean": 12.28,
+  "p50": 12.0,
+  "p95": 14.93
+ }
+}

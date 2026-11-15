@@ -98,9 +98,9 @@ def create_app(
         )  # L3 has its own host when GUARD_BASE_URL is set (ADR-0086)
         serving = ServingState(source_from_env(), ttl=st.champion_ttl_s)
         set_default(serving)
-        guards = GuardSet(
-            regex=RegexGuard(), base=base_http, champion=http, challenger=http, serving=serving
-        )
+        # No shadow call: the guard host serves one model and answers the "challenger" alias with the champion, so a
+        # shadow call to the same host only doubles the guard latency (ADR-0105). A distinct challenger host would go here.
+        guards = GuardSet(regex=RegexGuard(), base=base_http, champion=http, serving=serving)
     tel = telemetry if telemetry is not None else from_env()
     the_agent = agent or GroqAgent(st.groq_api_key, st.vault_models, on_fallback=tel.agent_fallback)
     app = FastAPI(title="BreachLab gateway", docs_url=None, redoc_url=None)

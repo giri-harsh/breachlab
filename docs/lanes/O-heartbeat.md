@@ -1,0 +1,8 @@
+- 16:42 lane O started: branch lane-O/ood-gold; Groq has no llama/kimi (only qwen3.8-27b, gpt-oss-*, allam-2-7b); Gemini flash models respond
+- 16:45 authored rows committed (scripts/ood_authored.py)
+- 16:50 public stage done (517 rows), gemma generation running in background
+- 16:52 ood_report.py + test done; starting L3 gold-review pipeline (393 id list not in repo: Neon access denied, reconstructing)
+- 17:11 gold screen done (1500 rows, 72 disagreements); judge A done on first 331, B running; gemma generation 2/13 jobs
+- 04:17 resumed after limit reset: generation complete (13 jobs), restarting judges B (cache resumes)
+- 04:24 ood_test.jsonl built (934 rows), card + tests committed; waiting on gold judges
+- 04:53 gold review done (361 rows, 40 relabels, 1 unresolved); docs/gold-review.md + O-gold-review.json written; all tests pass; final commit

@@ -45,7 +45,7 @@ levels:
     boss: The Watcher
     defense: lenient_guard
     input_guard: champion
-    guard_threshold: 0.99990224  # lenient on purpose: val attack miss rate (ASR) 28% for guard v2 (28th percentile of val attack scores; was 0.9999943 = 61%); ADR-0100
+    guard_threshold: 0.9999681  # lenient on purpose: val attack miss rate (ASR) 28% for the cascade (28th percentile of val attack scores of student-or-teacher; guard v2 teacher alone was 0.99990224; 0.9999943 = 61%); ADR-0100, ADR-0105
     output_filter: false
     demonstrates: A guard tuned to let most traffic through
     system_prompt: >-

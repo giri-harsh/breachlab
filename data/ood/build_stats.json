@@ -1,0 +1,135 @@
+{
+ "candidates": {
+  "authored:UNSAFE": 150,
+  "authored:SAFE": 151,
+  "public:UNSAFE": 320,
+  "public:SAFE": 197,
+  "generated:UNSAFE": 174,
+  "generated:SAFE": 122
+ },
+ "candidates_by_source": {
+  "ood-authored-claude|UNSAFE": 150,
+  "ood-authored-claude|SAFE": 151,
+  "TrustAIRLab/in-the-wild-jailbreak-prompts|UNSAFE": 80,
+  "TrustAIRLab/in-the-wild-jailbreak-prompts|SAFE": 50,
+  "Lakera/mosscap_prompt_injection|UNSAFE": 90,
+  "reshabhs/SPML_Chatbot_Prompt_Injection|UNSAFE": 70,
+  "reshabhs/SPML_Chatbot_Prompt_Injection|SAFE": 30,
+  "neuralchemy/Prompt-injection-dataset|UNSAFE": 80,
+  "neuralchemy/Prompt-injection-dataset|SAFE": 12,
+  "OpenAssistant/oasst1|SAFE": 80,
+  "fka/prompts.chat|SAFE": 25,
+  "ood-generated-gemma-4-31b-it|UNSAFE": 174,
+  "ood-generated-gemma-4-31b-it|SAFE": 122
+ },
+ "screen_dropped": {
+  "TrustAIRLab/in-the-wild-jailbreak-prompts:UNSAFE->SAFE": 14,
+  "TrustAIRLab/in-the-wild-jailbreak-prompts:SAFE->UNSAFE": 4,
+  "Lakera/mosscap_prompt_injection:UNSAFE->SAFE": 22,
+  "reshabhs/SPML_Chatbot_Prompt_Injection:UNSAFE->SAFE": 30,
+  "neuralchemy/Prompt-injection-dataset:UNSAFE->SAFE": 13,
+  "neuralchemy/Prompt-injection-dataset:SAFE->UNSAFE": 2,
+  "OpenAssistant/oasst1:SAFE->UNSAFE": 2,
+  "fka/prompts.chat:SAFE->UNSAFE": 1,
+  "ood-generated-gemma-4-31b-it:UNSAFE->SAFE": 1,
+  "ood-generated-gemma-4-31b-it:SAFE->UNSAFE": 2
+ },
+ "reference_rows": 76135,
+ "reference_pools": [
+  "data/processed/v1/gold_test.jsonl",
+  "data/processed/v1/mining_pool.jsonl",
+  "data/processed/v1/seeds.jsonl",
+  "data/processed/v1/train.jsonl",
+  "data/processed/v1/val.jsonl",
+  "data/processed/v2/gold_test.jsonl",
+  "data/processed/v2/mining_pool.jsonl",
+  "data/processed/v2/new_rows.jsonl",
+  "data/processed/v2/train.jsonl",
+  "data/processed/v2/val.jsonl",
+  "data/review/opener_slice_v1.jsonl"
+ ],
+ "reference_pool_sizes": {
+  "data/processed/v1/train.jsonl": 19330,
+  "data/processed/v1/val.jsonl": 2147,
+  "data/processed/v1/gold_test.jsonl": 1500,
+  "data/processed/v1/mining_pool.jsonl": 5000,
+  "data/processed/v2/train.jsonl": 21242,
+  "data/processed/v2/val.jsonl": 2407,
+  "data/processed/v2/gold_test.jsonl": 1500,
+  "data/processed/v2/mining_pool.jsonl": 5000,
+  "data/processed/v1/seeds.jsonl": 15537,
+  "data/processed/v2/new_rows.jsonl": 2172,
+  "data/review/opener_slice_v1.jsonl": 300
+ },
+ "leakage_threshold": 0.7,
+ "leakage_dropped": {
+  "ood-authored-claude|near": 4,
+  "ood-authored-claude|exact": 1,
+  "TrustAIRLab/in-the-wild-jailbreak-prompts|exact": 44,
+  "TrustAIRLab/in-the-wild-jailbreak-prompts|near": 3,
+  "reshabhs/SPML_Chatbot_Prompt_Injection|near": 1,
+  "neuralchemy/Prompt-injection-dataset|exact": 2,
+  "OpenAssistant/oasst1|near": 1,
+  "ood-generated-gemma-4-31b-it|near": 2
+ },
+ "leakage_dropped_total": 58,
+ "leakage_dropped_by_pool": {
+  "near:data/processed/v2/train.jsonl": 6,
+  "near:data/processed/v1/train.jsonl": 2,
+  "exact:data/processed/v2/val.jsonl": 1,
+  "exact:data/processed/v1/train.jsonl": 30,
+  "near:data/processed/v1/seeds.jsonl": 1,
+  "exact:data/processed/v1/mining_pool.jsonl": 8,
+  "exact:data/processed/v1/seeds.jsonl": 5,
+  "exact:data/processed/v1/val.jsonl": 2,
+  "exact:data/processed/v1/gold_test.jsonl": 1,
+  "near:data/processed/v2/mining_pool.jsonl": 1,
+  "near:data/processed/v2/new_rows.jsonl": 1
+ },
+ "self_dedup_dropped": 1,
+ "source_cap_dropped": 30,
+ "final": 934,
+ "final_by_label": {
+  "UNSAFE": 484,
+  "SAFE": 450
+ },
+ "final_by_language_label": {
+  "en:UNSAFE": 385,
+  "en:SAFE": 349,
+  "hinglish:UNSAFE": 52,
+  "hi:UNSAFE": 47,
+  "hi:SAFE": 50,
+  "hinglish:SAFE": 51
+ },
+ "final_by_source_label": {
+  "reshabhs/SPML_Chatbot_Prompt_Injection|UNSAFE": 40,
+  "ood-generated-gemma-4-31b-it|SAFE": 118,
+  "OpenAssistant/oasst1|SAFE": 77,
+  "ood-authored-claude|UNSAFE": 150,
+  "ood-generated-gemma-4-31b-it|UNSAFE": 142,
+  "reshabhs/SPML_Chatbot_Prompt_Injection|SAFE": 29,
+  "ood-authored-claude|SAFE": 146,
+  "neuralchemy/Prompt-injection-dataset|UNSAFE": 65,
+  "TrustAIRLab/in-the-wild-jailbreak-prompts|UNSAFE": 19,
+  "fka/prompts.chat|SAFE": 24,
+  "Lakera/mosscap_prompt_injection|UNSAFE": 68,
+  "TrustAIRLab/in-the-wild-jailbreak-prompts|SAFE": 46,
+  "neuralchemy/Prompt-injection-dataset|SAFE": 10
+ },
+ "final_by_category": {
+  "injection": 160,
+  "none": 450,
+  "exfiltration": 231,
+  "jailbreak": 93
+ },
+ "skipped_sources": {
+  "xTRam1/safe-guard-prompt-injection": "no licence stated on the dataset card",
+  "imoxto/prompt_injection_cleaned_dataset": "no licence stated on the dataset card",
+  "geekyrakshit/prompt-injection-dataset": "no licence stated; aggregate of other sets (overlap with training sources)",
+  "hackaprompt/hackaprompt-dataset": "MIT but gated (terms not accepted for this token); hackaprompt rows also reach us via neuralchemy",
+  "qualifire/prompt-injections-benchmark": "CC-BY-NC-4.0 (non-commercial)",
+  "lmsys/toxic-chat": "CC-BY-NC-4.0 (non-commercial)",
+  "allenai/wildjailbreak": "ODC-BY but gated and model-generated; not requested",
+  "yanismiraoui/prompt_injections": "Apache-2.0 but 7 European languages outside the en/hi/hinglish schema"
+ }
+}

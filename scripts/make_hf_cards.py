@@ -209,6 +209,15 @@ ASR {f["seed_asr"]}, FPR {f["seed_fpr"]}, F1 {f["seed_f1"]}, AUROC {f["seed_auro
 fp16 (NaN gradients, NaN logits on every gold row); it is excluded from the mean, kept as evidence, and the third
 seed was re-run unchanged as seed 3. The sd over three seeds is itself noisy. The table above is seed 0.
 
+## Cost
+
+Free tiers, $0 today (Groq free tier, Vercel Hobby, Neon free; hosting on the Hub is free). Measured from real vault-agent
+token usage and the guard's measured compute, at list prices if usage went past the free tiers: about $0.11 per 1,000
+requests and $3.4 per 1,000 games (a game is five bosses, about 30 messages). Per 1,000 games: this guard on Vercel
+$2.24, vault LLM $0.47 (gpt-oss-20b), gateway $0.60, database $0.06. The limit that binds first is the Vercel Hobby
+Active CPU allowance (4 h a month, about 260 games a month at 1.1 s of guard CPU per call). A guard with 5-10x lower
+compute would cost about $1.0 to $1.4 per 1,000 games. Details: `docs/lanes/C-cost.md` in the BreachLab repository.
+
 ## Latency (target not met)
 
 The project target was p95 <= 300 ms on a CPU host. **It is not met.**

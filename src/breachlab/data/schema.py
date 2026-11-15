@@ -10,7 +10,7 @@ from pydantic import BaseModel, Field
 
 Label = Literal["SAFE", "UNSAFE"]
 Category = Literal["injection", "jailbreak", "exfiltration", "none"]
-Split = Literal["train", "val", "mining_pool", "gold_test", "unassigned"]
+Split = Literal["train", "val", "mining_pool", "gold_test", "ood_test", "unassigned"]
 Language = Literal["en", "hi", "hinglish"]
 Encoding = Literal["none", "base64", "hex", "leet", "rot13", "split"]
 LengthBucket = Literal["short", "medium", "long"]
@@ -121,7 +121,10 @@ def validate_rows(rows: list[Row]) -> None:
             ),
             "length_bucket": pa.Column(str, pa.Check.isin(["short", "medium", "long"])),
             "split": pa.Column(
-                str, pa.Check.isin(["train", "val", "mining_pool", "gold_test", "unassigned"])
+                str,
+                pa.Check.isin(
+                    ["train", "val", "mining_pool", "gold_test", "ood_test", "unassigned"]
+                ),
             ),
             "created_at": pa.Column(str),
             "parent_id": pa.Column(str, nullable=True),

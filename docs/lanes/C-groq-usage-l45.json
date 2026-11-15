@@ -1,0 +1,523 @@
+{
+ "measured_at": "2026-11-13T16:44:10Z",
+ "agent": "breachlab.gateway.agent.GroqAgent (production class; max_tokens=400, temperature=0.7, reasoning_effort=low for gpt-oss)",
+ "prompts": "configs/levels.yaml system_prompt, levels 4,5",
+ "message_set": {
+  "n": 12,
+  "benign_share": 0.25,
+  "mean_chars": 77.3,
+  "source": "docs/lanes/fresh_attacks_v2.jsonl (12 styles) + canary-style benign chat"
+ },
+ "models": [
+  {
+   "model": "qwen/qwen3.8-27b",
+   "n_sent": 12,
+   "n_ok": 12,
+   "per_level": {
+    "4": {
+     "prompt_tokens": {
+      "n": 6,
+      "mean": 69.7,
+      "p50": 69.0,
+      "p95": 78.0,
+      "max": 78.0
+     },
+     "completion_tokens": {
+      "n": 6,
+      "mean": 95.2,
+      "p50": 58.0,
+      "p95": 400.0,
+      "max": 400.0
+     },
+     "reasoning_tokens": {
+      "n": 6,
+      "mean": 0.0,
+      "p50": 0.0,
+      "p95": 0.0,
+      "max": 0.0
+     },
+     "total_tokens": {
+      "n": 6,
+      "mean": 164.8,
+      "p50": 133.0,
+      "p95": 467.0,
+      "max": 467.0
+     }
+    },
+    "5": {
+     "prompt_tokens": {
+      "n": 6,
+      "mean": 85.5,
+      "p50": 84.0,
+      "p95": 102.0,
+      "max": 102.0
+     },
+     "completion_tokens": {
+      "n": 6,
+      "mean": 67.0,
+      "p50": 59.0,
+      "p95": 165.0,
+      "max": 165.0
+     },
+     "reasoning_tokens": {
+      "n": 6,
+      "mean": 0.0,
+      "p50": 0.0,
+      "p95": 0.0,
+      "max": 0.0
+     },
+     "total_tokens": {
+      "n": 6,
+      "mean": 152.5,
+      "p50": 139.0,
+      "p95": 260.0,
+      "max": 260.0
+     }
+    },
+    "all": {
+     "prompt_tokens": {
+      "n": 12,
+      "mean": 77.6,
+      "p50": 78.0,
+      "p95": 95.0,
+      "max": 102.0
+     },
+     "completion_tokens": {
+      "n": 12,
+      "mean": 81.1,
+      "p50": 58.0,
+      "p95": 165.0,
+      "max": 400.0
+     },
+     "reasoning_tokens": {
+      "n": 12,
+      "mean": 0.0,
+      "p50": 0.0,
+      "p95": 0.0,
+      "max": 0.0
+     },
+     "total_tokens": {
+      "n": 12,
+      "mean": 158.7,
+      "p50": 136.0,
+      "p95": 260.0,
+      "max": 467.0
+     }
+    }
+   },
+   "rows": [
+    {
+     "level": 4,
+     "kind": "benign",
+     "msg_chars": 22,
+     "ok": true,
+     "status": 200,
+     "prompt_tokens": 64,
+     "completion_tokens": 16,
+     "reasoning_tokens": null,
+     "total_tokens": 80,
+     "visible_reply_chars": 58,
+     "wall_s": 0.56
+    },
+    {
+     "level": 5,
+     "kind": "attack",
+     "msg_chars": 111,
+     "ok": true,
+     "status": 200,
+     "prompt_tokens": 84,
+     "completion_tokens": 60,
+     "reasoning_tokens": null,
+     "total_tokens": 144,
+     "visible_reply_chars": 334,
+     "wall_s": 0.45
+    },
+    {
+     "level": 4,
+     "kind": "attack",
+     "msg_chars": 68,
+     "ok": true,
+     "status": 200,
+     "prompt_tokens": 78,
+     "completion_tokens": 71,
+     "reasoning_tokens": null,
+     "total_tokens": 149,
+     "visible_reply_chars": 378,
+     "wall_s": 0.95
+    },
+    {
+     "level": 5,
+     "kind": "attack",
+     "msg_chars": 164,
+     "ok": true,
+     "status": 200,
+     "prompt_tokens": 95,
+     "completion_tokens": 165,
+     "reasoning_tokens": null,
+     "total_tokens": 260,
+     "visible_reply_chars": 477,
+     "wall_s": 1.14
+    },
+    {
+     "level": 4,
+     "kind": "benign",
+     "msg_chars": 30,
+     "ok": true,
+     "status": 200,
+     "prompt_tokens": 65,
+     "completion_tokens": 8,
+     "reasoning_tokens": null,
+     "total_tokens": 73,
+     "visible_reply_chars": 31,
+     "wall_s": 1.46
+    },
+    {
+     "level": 5,
+     "kind": "attack",
+     "msg_chars": 102,
+     "ok": true,
+     "status": 200,
+     "prompt_tokens": 81,
+     "completion_tokens": 27,
+     "reasoning_tokens": null,
+     "total_tokens": 108,
+     "visible_reply_chars": 117,
+     "wall_s": 0.72
+    },
+    {
+     "level": 4,
+     "kind": "attack",
+     "msg_chars": 60,
+     "ok": true,
+     "status": 200,
+     "prompt_tokens": 69,
+     "completion_tokens": 18,
+     "reasoning_tokens": null,
+     "total_tokens": 87,
+     "visible_reply_chars": 83,
+     "wall_s": 0.62
+    },
+    {
+     "level": 5,
+     "kind": "attack",
+     "msg_chars": 54,
+     "ok": true,
+     "status": 200,
+     "prompt_tokens": 71,
+     "completion_tokens": 57,
+     "reasoning_tokens": null,
+     "total_tokens": 128,
+     "visible_reply_chars": 278,
+     "wall_s": 0.85
+    },
+    {
+     "level": 4,
+     "kind": "benign",
+     "msg_chars": 46,
+     "ok": true,
+     "status": 200,
+     "prompt_tokens": 67,
+     "completion_tokens": 400,
+     "reasoning_tokens": null,
+     "total_tokens": 467,
+     "visible_reply_chars": 2019,
+     "wall_s": 1.29
+    },
+    {
+     "level": 5,
+     "kind": "attack",
+     "msg_chars": 138,
+     "ok": true,
+     "status": 200,
+     "prompt_tokens": 102,
+     "completion_tokens": 34,
+     "reasoning_tokens": null,
+     "total_tokens": 136,
+     "visible_reply_chars": 160,
+     "wall_s": 0.76
+    },
+    {
+     "level": 4,
+     "kind": "attack",
+     "msg_chars": 49,
+     "ok": true,
+     "status": 200,
+     "prompt_tokens": 75,
+     "completion_tokens": 58,
+     "reasoning_tokens": null,
+     "total_tokens": 133,
+     "visible_reply_chars": 236,
+     "wall_s": 0.56
+    },
+    {
+     "level": 5,
+     "kind": "attack",
+     "msg_chars": 84,
+     "ok": true,
+     "status": 200,
+     "prompt_tokens": 80,
+     "completion_tokens": 59,
+     "reasoning_tokens": null,
+     "total_tokens": 139,
+     "visible_reply_chars": 346,
+     "wall_s": 0.43
+    }
+   ]
+  },
+  {
+   "model": "openai/gpt-oss-120b",
+   "n_sent": 12,
+   "n_ok": 12,
+   "per_level": {
+    "4": {
+     "prompt_tokens": {
+      "n": 6,
+      "mean": 125.7,
+      "p50": 127.0,
+      "p95": 131.0,
+      "max": 131.0
+     },
+     "completion_tokens": {
+      "n": 6,
+      "mean": 96.3,
+      "p50": 39.0,
+      "p95": 400.0,
+      "max": 400.0
+     },
+     "reasoning_tokens": {
+      "n": 6,
+      "mean": 13.2,
+      "p50": 15.0,
+      "p95": 18.0,
+      "max": 18.0
+     },
+     "total_tokens": {
+      "n": 6,
+      "mean": 222.0,
+      "p50": 170.0,
+      "p95": 522.0,
+      "max": 522.0
+     }
+    },
+    "5": {
+     "prompt_tokens": {
+      "n": 6,
+      "mean": 141.3,
+      "p50": 141.0,
+      "p95": 156.0,
+      "max": 156.0
+     },
+     "completion_tokens": {
+      "n": 6,
+      "mean": 27.8,
+      "p50": 26.0,
+      "p95": 38.0,
+      "max": 38.0
+     },
+     "reasoning_tokens": {
+      "n": 6,
+      "mean": 7.0,
+      "p50": 5.0,
+      "p95": 17.0,
+      "max": 17.0
+     },
+     "total_tokens": {
+      "n": 6,
+      "mean": 169.2,
+      "p50": 167.0,
+      "p95": 188.0,
+      "max": 188.0
+     }
+    },
+    "all": {
+     "prompt_tokens": {
+      "n": 12,
+      "mean": 133.5,
+      "p50": 131.0,
+      "p95": 150.0,
+      "max": 156.0
+     },
+     "completion_tokens": {
+      "n": 12,
+      "mean": 62.1,
+      "p50": 28.0,
+      "p95": 50.0,
+      "max": 400.0
+     },
+     "reasoning_tokens": {
+      "n": 12,
+      "mean": 10.1,
+      "p50": 12.0,
+      "p95": 17.0,
+      "max": 18.0
+     },
+     "total_tokens": {
+      "n": 12,
+      "mean": 195.6,
+      "p50": 167.0,
+      "p95": 188.0,
+      "max": 522.0
+     }
+    }
+   },
+   "rows": [
+    {
+     "level": 4,
+     "kind": "benign",
+     "msg_chars": 22,
+     "ok": true,
+     "status": 200,
+     "prompt_tokens": 121,
+     "completion_tokens": 50,
+     "reasoning_tokens": 15,
+     "total_tokens": 171,
+     "visible_reply_chars": 114,
+     "wall_s": 0.47
+    },
+    {
+     "level": 5,
+     "kind": "attack",
+     "msg_chars": 111,
+     "ok": true,
+     "status": 200,
+     "prompt_tokens": 141,
+     "completion_tokens": 26,
+     "reasoning_tokens": 5,
+     "total_tokens": 167,
+     "visible_reply_chars": 38,
+     "wall_s": 0.59
+    },
+    {
+     "level": 4,
+     "kind": "attack",
+     "msg_chars": 68,
+     "ok": true,
+     "status": 200,
+     "prompt_tokens": 131,
+     "completion_tokens": 35,
+     "reasoning_tokens": 14,
+     "total_tokens": 166,
+     "visible_reply_chars": 38,
+     "wall_s": 0.67
+    },
+    {
+     "level": 5,
+     "kind": "attack",
+     "msg_chars": 164,
+     "ok": true,
+     "status": 200,
+     "prompt_tokens": 150,
+     "completion_tokens": 38,
+     "reasoning_tokens": 17,
+     "total_tokens": 188,
+     "visible_reply_chars": 38,
+     "wall_s": 0.68
+    },
+    {
+     "level": 4,
+     "kind": "benign",
+     "msg_chars": 30,
+     "ok": true,
+     "status": 200,
+     "prompt_tokens": 122,
+     "completion_tokens": 28,
+     "reasoning_tokens": 12,
+     "total_tokens": 150,
+     "visible_reply_chars": 31,
+     "wall_s": 0.49
+    },
+    {
+     "level": 5,
+     "kind": "attack",
+     "msg_chars": 102,
+     "ok": true,
+     "status": 200,
+     "prompt_tokens": 138,
+     "completion_tokens": 26,
+     "reasoning_tokens": 5,
+     "total_tokens": 164,
+     "visible_reply_chars": 38,
+     "wall_s": 0.86
+    },
+    {
+     "level": 4,
+     "kind": "attack",
+     "msg_chars": 60,
+     "ok": true,
+     "status": 200,
+     "prompt_tokens": 127,
+     "completion_tokens": 26,
+     "reasoning_tokens": 5,
+     "total_tokens": 153,
+     "visible_reply_chars": 38,
+     "wall_s": 0.58
+    },
+    {
+     "level": 5,
+     "kind": "attack",
+     "msg_chars": 54,
+     "ok": true,
+     "status": 200,
+     "prompt_tokens": 127,
+     "completion_tokens": 25,
+     "reasoning_tokens": 5,
+     "total_tokens": 152,
+     "visible_reply_chars": 36,
+     "wall_s": 0.75
+    },
+    {
+     "level": 4,
+     "kind": "benign",
+     "msg_chars": 46,
+     "ok": true,
+     "status": 200,
+     "prompt_tokens": 122,
+     "completion_tokens": 400,
+     "reasoning_tokens": 15,
+     "total_tokens": 522,
+     "visible_reply_chars": 1719,
+     "wall_s": 1.41
+    },
+    {
+     "level": 5,
+     "kind": "attack",
+     "msg_chars": 138,
+     "ok": true,
+     "status": 200,
+     "prompt_tokens": 156,
+     "completion_tokens": 26,
+     "reasoning_tokens": 5,
+     "total_tokens": 182,
+     "visible_reply_chars": 38,
+     "wall_s": 0.57
+    },
+    {
+     "level": 4,
+     "kind": "attack",
+     "msg_chars": 49,
+     "ok": true,
+     "status": 200,
+     "prompt_tokens": 131,
+     "completion_tokens": 39,
+     "reasoning_tokens": 18,
+     "total_tokens": 170,
+     "visible_reply_chars": 38,
+     "wall_s": 0.56
+    },
+    {
+     "level": 5,
+     "kind": "attack",
+     "msg_chars": 84,
+     "ok": true,
+     "status": 200,
+     "prompt_tokens": 136,
+     "completion_tokens": 26,
+     "reasoning_tokens": 5,
+     "total_tokens": 162,
+     "visible_reply_chars": 38,
+     "wall_s": 0.6
+    }
+   ]
+  }
+ ]
+}

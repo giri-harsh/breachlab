@@ -33,6 +33,7 @@ VENDOR = [
     "breachlab/serve/guard_runtime.py",
     "breachlab/serve/onnx_backend.py",
     "breachlab/serve/space_app.py",
+    "breachlab/serve/cascade.py",
 ]
 OWN_FILES = ["Dockerfile", "README.md", "requirements.txt", "app.py"]
 CONFIGS = ["serve.yaml"]

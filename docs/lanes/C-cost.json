@@ -1,0 +1,783 @@
+{
+ "measured_at": "2026-11-13T16:51:52Z",
+ "supersedes": "docs/lanes/P-cost.json (chars/4 lower bound)",
+ "actual_bill_usd": 0.0,
+ "actual_bill_note": "Groq free tier, Vercel Hobby, Neon free, Hugging Face free; $0 budget (ADR-0037). Figures below are LIST prices for usage above the free tiers.",
+ "pricing": {
+  "fetched": "2026-11-13",
+  "groq_usd_per_1m_tokens": {
+   "openai/gpt-oss-20b": {
+    "in": 0.075,
+    "out": 0.3
+   },
+   "openai/gpt-oss-120b": {
+    "in": 0.15,
+    "out": 0.6
+   },
+   "qwen/qwen3.8-27b": {
+    "in": 0.8,
+    "out": 4.0
+   },
+   "source": "https://console.groq.com/docs/models (server-rendered table 'price per 1M tokens'; groq.com/pricing is client-rendered)"
+  },
+  "groq_limits": {
+   "openai/gpt-oss-20b": {
+    "rpm": 30,
+    "rpd": 1000,
+    "tpm": 8000,
+    "tpd": 200000
+   },
+   "openai/gpt-oss-120b": {
+    "rpm": 30,
+    "rpd": 1000,
+    "tpm": 8000,
+    "tpd": 200000
+   },
+   "qwen/qwen3.8-27b": {
+    "rpm": 30,
+    "rpd": 1000,
+    "tpm": 8000,
+    "tpd": 200000
+   },
+   "source": "https://console.groq.com/docs/rate-limits shows these as the base (Developer-plan) limits; the Free-plan tab did not render, CLAUDE.md records the observed 200k tokens/day cap"
+  },
+  "vercel_fluid_iad1": {
+   "active_cpu_usd_per_h": 0.128,
+   "memory_usd_per_gb_h": 0.0106,
+   "invocations_usd_per_m": 0.6,
+   "source": "https://vercel.com/docs/functions/usage-and-pricing (regional table, Washington D.C. iad1; invocations: the page's $0.60 per million Pro example)"
+  },
+  "vercel_hobby_included": {
+   "active_cpu_h": 4,
+   "memory_gb_h": 360,
+   "invocations": 1000000,
+   "note": "per month, per team (all projects); exceeding Hobby limits pauses the feature for 30 days, no overage billing",
+   "source": "https://vercel.com/docs/plans/hobby and https://vercel.com/docs/pricing"
+  },
+  "neon": {
+   "launch_usd_per_cu_h": 0.106,
+   "storage_usd_per_gb_month": 0.35,
+   "free_cu_h_per_project_month": 100,
+   "free_storage_gb_per_project": 1,
+   "source": "https://neon.com/pricing"
+  },
+  "huggingface": {
+   "public_repos": "free, best-effort storage; private repos 100 GB free",
+   "source": "https://huggingface.co/docs/hub/storage-limits"
+  }
+ },
+ "assumptions": {
+  "scenarios_messages_per_boss": {
+   "quick": [
+    1,
+    2,
+    3,
+    5,
+    5
+   ],
+   "typical": [
+    2,
+    3,
+    5,
+    10,
+    10
+   ],
+   "full_cap": [
+    20,
+    20,
+    20,
+    20,
+    20
+   ]
+  },
+  "headline_scenario": "typical",
+  "attack_share": 0.75,
+  "attack_block_rate_by_level": {
+   "1": 0.0,
+   "2": 0.245,
+   "3": 0.418,
+   "4": 0.936,
+   "5": 0.955
+  },
+  "benign_block_rate_by_level": {
+   "1": 0.0,
+   "2": 0.0,
+   "3": 0.0,
+   "4": 0.1,
+   "5": 0.1
+  },
+  "guard_model_time_mean_s": 1.1151880382048194,
+  "guard_model_time_p50_s_v2": 0.721766486999968,
+  "guard_memory_gb": 2.0,
+  "gateway_memory_gb": 2.0,
+  "gateway_cpu_ms_in_process_mean": 14.49,
+  "gateway_cpu_factor_for_network_io": 3.0,
+  "db_wall_s_per_message": 0.15,
+  "gateway_guard_net_s": 0.15,
+  "extra_gateway_calls_per_message": 1.0,
+  "guard_factor": 1.0,
+  "shadow_guard_call_at_l4_l5": true,
+  "vault_model_for_gpt_oss_20b": "tokens proxied from the gpt-oss-120b measurement (20b daily cap exhausted), priced at the 20b rate",
+  "memory_billing": "no sharing across concurrent requests (upper bound for the gateway; the guard is CPU-bound on 1 vCPU)",
+  "gemini": "not in the serving path (offline judge only): $0 per request",
+  "hf_hub": "model/dataset hosting and the guard download at cold start: free"
+ },
+ "measured": {
+  "groq_tokens_per_vault_call": {
+   "openai/gpt-oss-20b": {
+    "1": {
+     "prompt": 263.6,
+     "completion": 130.8,
+     "completion_p95": 251.0,
+     "prompt_p95": 277.0,
+     "wall_s": 0.9,
+     "reply_chars": 293.8,
+     "n": 14.0
+    },
+    "2": {
+     "prompt": 173.3,
+     "completion": 42.8,
+     "completion_p95": 61.0,
+     "prompt_p95": 185.0,
+     "wall_s": 0.7,
+     "reply_chars": 33.8,
+     "n": 13.0
+    },
+    "3": {
+     "prompt": 151.3,
+     "completion": 96.3,
+     "completion_p95": 400.0,
+     "prompt_p95": 157.0,
+     "wall_s": 0.8,
+     "reply_chars": 287.7,
+     "n": 13.0
+    },
+    "4": {
+     "prompt": 125.7,
+     "completion": 96.3,
+     "completion_p95": 400.0,
+     "prompt_p95": 131.0,
+     "wall_s": 0.7,
+     "reply_chars": 329.7,
+     "n": 6.0
+    },
+    "5": {
+     "prompt": 141.3,
+     "completion": 27.8,
+     "completion_p95": 38.0,
+     "prompt_p95": 156.0,
+     "wall_s": 0.7,
+     "reply_chars": 37.7,
+     "n": 6.0
+    }
+   },
+   "openai/gpt-oss-120b": {
+    "1": {
+     "prompt": 263.6,
+     "completion": 130.8,
+     "completion_p95": 251.0,
+     "prompt_p95": 277.0,
+     "wall_s": 0.9,
+     "reply_chars": 293.8,
+     "n": 14.0
+    },
+    "2": {
+     "prompt": 173.3,
+     "completion": 42.8,
+     "completion_p95": 61.0,
+     "prompt_p95": 185.0,
+     "wall_s": 0.7,
+     "reply_chars": 33.8,
+     "n": 13.0
+    },
+    "3": {
+     "prompt": 151.3,
+     "completion": 96.3,
+     "completion_p95": 400.0,
+     "prompt_p95": 157.0,
+     "wall_s": 0.8,
+     "reply_chars": 287.7,
+     "n": 13.0
+    },
+    "4": {
+     "prompt": 125.7,
+     "completion": 96.3,
+     "completion_p95": 400.0,
+     "prompt_p95": 131.0,
+     "wall_s": 0.7,
+     "reply_chars": 329.7,
+     "n": 6.0
+    },
+    "5": {
+     "prompt": 141.3,
+     "completion": 27.8,
+     "completion_p95": 38.0,
+     "prompt_p95": 156.0,
+     "wall_s": 0.7,
+     "reply_chars": 37.7,
+     "n": 6.0
+    }
+   },
+   "qwen/qwen3.8-27b": {
+    "1": {
+     "prompt": 207.5,
+     "completion": 146.5,
+     "completion_p95": 370.0,
+     "prompt_p95": 224.0,
+     "wall_s": 2.1,
+     "reply_chars": 489.3,
+     "n": 13.0
+    },
+    "2": {
+     "prompt": 115.9,
+     "completion": 22.8,
+     "completion_p95": 61.0,
+     "prompt_p95": 128.0,
+     "wall_s": 0.6,
+     "reply_chars": 70.2,
+     "n": 11.0
+    },
+    "3": {
+     "prompt": 95.3,
+     "completion": 61.2,
+     "completion_p95": 152.0,
+     "prompt_p95": 100.0,
+     "wall_s": 0.8,
+     "reply_chars": 257.1,
+     "n": 13.0
+    },
+    "4": {
+     "prompt": 69.7,
+     "completion": 95.2,
+     "completion_p95": 400.0,
+     "prompt_p95": 78.0,
+     "wall_s": 0.9,
+     "reply_chars": 467.5,
+     "n": 6.0
+    },
+    "5": {
+     "prompt": 85.5,
+     "completion": 67.0,
+     "completion_p95": 165.0,
+     "prompt_p95": 102.0,
+     "wall_s": 0.7,
+     "reply_chars": 285.3,
+     "n": 6.0
+    }
+   }
+  },
+  "gateway_cpu": {
+   "measured_at": "2026-11-13T16:48:20Z",
+   "method": "in-process TestClient, SQLite in memory, instant fake guard and agent; time.process_time (CPU)",
+   "caveat": "upper bound for the server side of SQLite and the fake guard (TestClient adds client-side work); excludes Postgres driver/TLS and cold-start imports",
+   "n": 300,
+   "post_message_cpu_ms": {
+    "mean": 14.49,
+    "p50": 13.95,
+    "p95": 18.01
+   },
+   "get_state_cpu_ms": {
+    "mean": 12.28,
+    "p50": 12.0,
+    "p95": 14.93
+   }
+  },
+  "guard_cold_start": {
+   "wall_s": 12.8,
+   "cpu_s": 10.0
+  }
+ },
+ "scenarios": {
+  "quick": {
+   "messages_per_boss": [
+    1,
+    2,
+    3,
+    5,
+    5
+   ],
+   "openai/gpt-oss-20b": {
+    "messages": 16,
+    "usd_per_game": 0.0017490607062150367,
+    "usd_per_1k_games": 1.7490607062150367,
+    "usd_per_1k_requests": 0.1093162941384398,
+    "breakdown_usd_per_1k_requests": {
+     "vault_llm": 0.016300536221590906,
+     "vercel_gateway": 0.01964205454095321,
+     "vercel_guard": 0.07136032872311791,
+     "neon": 0.002013374652777778
+    },
+    "breakdown_usd_per_1k_games": {
+     "vault_llm": 0.2608085795454545,
+     "vercel_gateway": 0.31427287265525133,
+     "vercel_guard": 1.1417652595698866,
+     "neon": 0.03221399444444445
+    },
+    "neon_bytes_per_game": 7913,
+    "vault_tokens_per_game": 1778.6505000000002,
+    "vault_calls_per_game": 7.3500000000000005,
+    "guard_calls_per_game": 24.295,
+    "guard_cpu_s_per_game": 27.094000291839812,
+    "guard_gb_s_per_game": 55.64572785640691,
+    "gateway_cpu_s_per_game": 1.2849599999999999,
+    "gateway_gb_s_per_game": 84.69693033574575,
+    "gateway_invocations_per_game": 32.0,
+    "guard_invocations_per_game": 24.295454545454543,
+    "free_tier_ceiling_games_per_month": {
+     "vercel_active_cpu_4h": 507,
+     "vercel_memory_360gbh": 9235,
+     "vercel_invocations_1m": 17763,
+     "groq_tpd_200k_per_month_one_model": 3373,
+     "groq_rpd_1000_per_month_one_model": 4082,
+     "neon_storage_1gb": 126374
+    },
+    "binding_limit": "vercel_active_cpu_4h"
+   },
+   "openai/gpt-oss-120b": {
+    "messages": 16,
+    "usd_per_game": 0.0020098692857604913,
+    "usd_per_1k_games": 2.0098692857604914,
+    "usd_per_1k_requests": 0.1256168303600307,
+    "breakdown_usd_per_1k_requests": {
+     "vault_llm": 0.03260107244318181,
+     "vercel_gateway": 0.01964205454095321,
+     "vercel_guard": 0.07136032872311791,
+     "neon": 0.002013374652777778
+    },
+    "breakdown_usd_per_1k_games": {
+     "vault_llm": 0.521617159090909,
+     "vercel_gateway": 0.31427287265525133,
+     "vercel_guard": 1.1417652595698866,
+     "neon": 0.03221399444444445
+    },
+    "neon_bytes_per_game": 7913,
+    "vault_tokens_per_game": 1778.6505000000002,
+    "vault_calls_per_game": 7.3500000000000005,
+    "guard_calls_per_game": 24.295,
+    "guard_cpu_s_per_game": 27.094000291839812,
+    "guard_gb_s_per_game": 55.64572785640691,
+    "gateway_cpu_s_per_game": 1.2849599999999999,
+    "gateway_gb_s_per_game": 84.69693033574575,
+    "gateway_invocations_per_game": 32.0,
+    "guard_invocations_per_game": 24.295454545454543,
+    "free_tier_ceiling_games_per_month": {
+     "vercel_active_cpu_4h": 507,
+     "vercel_memory_360gbh": 9235,
+     "vercel_invocations_1m": 17763,
+     "groq_tpd_200k_per_month_one_model": 3373,
+     "groq_rpd_1000_per_month_one_model": 4082,
+     "neon_storage_1gb": 126374
+    },
+    "binding_limit": "vercel_active_cpu_4h"
+   },
+   "qwen/qwen3.8-27b": {
+    "messages": 16,
+    "usd_per_game": 0.0042325266721241275,
+    "usd_per_1k_games": 4.232526672124128,
+    "usd_per_1k_requests": 0.264532917007758,
+    "breakdown_usd_per_1k_requests": {
+     "vault_llm": 0.17151715909090906,
+     "vercel_gateway": 0.01964205454095321,
+     "vercel_guard": 0.07136032872311791,
+     "neon": 0.002013374652777778
+    },
+    "breakdown_usd_per_1k_games": {
+     "vault_llm": 2.744274545454545,
+     "vercel_gateway": 0.31427287265525133,
+     "vercel_guard": 1.1417652595698866,
+     "neon": 0.03221399444444445
+    },
+    "neon_bytes_per_game": 7913,
+    "vault_tokens_per_game": 1325.0114,
+    "vault_calls_per_game": 7.3500000000000005,
+    "guard_calls_per_game": 24.295,
+    "guard_cpu_s_per_game": 27.094000291839812,
+    "guard_gb_s_per_game": 55.64572785640691,
+    "gateway_cpu_s_per_game": 1.2849599999999999,
+    "gateway_gb_s_per_game": 84.69693033574575,
+    "gateway_invocations_per_game": 32.0,
+    "guard_invocations_per_game": 24.295454545454543,
+    "free_tier_ceiling_games_per_month": {
+     "vercel_active_cpu_4h": 507,
+     "vercel_memory_360gbh": 9235,
+     "vercel_invocations_1m": 17763,
+     "groq_tpd_200k_per_month_one_model": 4528,
+     "groq_rpd_1000_per_month_one_model": 4082,
+     "neon_storage_1gb": 126374
+    },
+    "binding_limit": "vercel_active_cpu_4h"
+   }
+  },
+  "typical": {
+   "messages_per_boss": [
+    2,
+    3,
+    5,
+    10,
+    10
+   ],
+   "openai/gpt-oss-20b": {
+    "messages": 30,
+    "usd_per_game": 0.0033732959132291504,
+    "usd_per_1k_games": 3.3732959132291502,
+    "usd_per_1k_requests": 0.11244319710763835,
+    "breakdown_usd_per_1k_requests": {
+     "vault_llm": 0.01576395170454545,
+     "vercel_gateway": 0.020125512499361183,
+     "vercel_guard": 0.07455118345928725,
+     "neon": 0.002002549444444444
+    },
+    "breakdown_usd_per_1k_games": {
+     "vault_llm": 0.47291855113636355,
+     "vercel_gateway": 0.6037653749808355,
+     "vercel_guard": 2.236535503778618,
+     "neon": 0.06007648333333333
+    },
+    "neon_bytes_per_game": 13909,
+    "vault_tokens_per_game": 3211.1098,
+    "vault_calls_per_game": 13.198,
+    "guard_calls_per_game": 47.59,
+    "guard_cpu_s_per_game": 53.07281254547481,
+    "guard_gb_s_per_game": 109.00107963640417,
+    "gateway_cpu_s_per_game": 2.4093,
+    "gateway_gb_s_per_game": 163.73254244632153,
+    "gateway_invocations_per_game": 60.0,
+    "guard_invocations_per_game": 47.590909090909086,
+    "free_tier_ceiling_games_per_month": {
+     "vercel_active_cpu_4h": 260,
+     "vercel_memory_360gbh": 4752,
+     "vercel_invocations_1m": 9294,
+     "groq_tpd_200k_per_month_one_model": 1869,
+     "groq_rpd_1000_per_month_one_model": 2273,
+     "neon_storage_1gb": 71896
+    },
+    "binding_limit": "vercel_active_cpu_4h"
+   },
+   "openai/gpt-oss-120b": {
+    "messages": 30,
+    "usd_per_game": 0.0038462144643655136,
+    "usd_per_1k_games": 3.846214464365514,
+    "usd_per_1k_requests": 0.12820714881218379,
+    "breakdown_usd_per_1k_requests": {
+     "vault_llm": 0.0315279034090909,
+     "vercel_gateway": 0.020125512499361183,
+     "vercel_guard": 0.07455118345928725,
+     "neon": 0.002002549444444444
+    },
+    "breakdown_usd_per_1k_games": {
+     "vault_llm": 0.9458371022727271,
+     "vercel_gateway": 0.6037653749808355,
+     "vercel_guard": 2.236535503778618,
+     "neon": 0.06007648333333333
+    },
+    "neon_bytes_per_game": 13909,
+    "vault_tokens_per_game": 3211.1098,
+    "vault_calls_per_game": 13.198,
+    "guard_calls_per_game": 47.59,
+    "guard_cpu_s_per_game": 53.07281254547481,
+    "guard_gb_s_per_game": 109.00107963640417,
+    "gateway_cpu_s_per_game": 2.4093,
+    "gateway_gb_s_per_game": 163.73254244632153,
+    "gateway_invocations_per_game": 60.0,
+    "guard_invocations_per_game": 47.590909090909086,
+    "free_tier_ceiling_games_per_month": {
+     "vercel_active_cpu_4h": 260,
+     "vercel_memory_360gbh": 4752,
+     "vercel_invocations_1m": 9294,
+     "groq_tpd_200k_per_month_one_model": 1869,
+     "groq_rpd_1000_per_month_one_model": 2273,
+     "neon_storage_1gb": 71896
+    },
+    "binding_limit": "vercel_active_cpu_4h"
+   },
+   "qwen/qwen3.8-27b": {
+    "messages": 30,
+    "usd_per_game": 0.008018514271183694,
+    "usd_per_1k_games": 8.018514271183694,
+    "usd_per_1k_requests": 0.2672838090394565,
+    "breakdown_usd_per_1k_requests": {
+     "vault_llm": 0.17060456363636362,
+     "vercel_gateway": 0.020125512499361183,
+     "vercel_guard": 0.07455118345928725,
+     "neon": 0.002002549444444444
+    },
+    "breakdown_usd_per_1k_games": {
+     "vault_llm": 5.118136909090908,
+     "vercel_gateway": 0.6037653749808355,
+     "vercel_guard": 2.236535503778618,
+     "neon": 0.06007648333333333
+    },
+    "neon_bytes_per_game": 13909,
+    "vault_tokens_per_game": 2429.4846000000002,
+    "vault_calls_per_game": 13.198,
+    "guard_calls_per_game": 47.59,
+    "guard_cpu_s_per_game": 53.07281254547481,
+    "guard_gb_s_per_game": 109.00107963640417,
+    "gateway_cpu_s_per_game": 2.4093,
+    "gateway_gb_s_per_game": 163.73254244632153,
+    "gateway_invocations_per_game": 60.0,
+    "guard_invocations_per_game": 47.590909090909086,
+    "free_tier_ceiling_games_per_month": {
+     "vercel_active_cpu_4h": 260,
+     "vercel_memory_360gbh": 4752,
+     "vercel_invocations_1m": 9294,
+     "groq_tpd_200k_per_month_one_model": 2470,
+     "groq_rpd_1000_per_month_one_model": 2273,
+     "neon_storage_1gb": 71896
+    },
+    "binding_limit": "vercel_active_cpu_4h"
+   }
+  },
+  "full_cap": {
+   "messages_per_boss": [
+    20,
+    20,
+    20,
+    20,
+    20
+   ],
+   "openai/gpt-oss-20b": {
+    "messages": 100,
+    "usd_per_game": 0.009383334006300408,
+    "usd_per_1k_games": 9.383334006300409,
+    "usd_per_1k_requests": 0.09383334006300408,
+    "breakdown_usd_per_1k_requests": {
+     "vault_llm": 0.02461307386363636,
+     "vercel_gateway": 0.017779046809902065,
+     "vercel_guard": 0.04943021161168789,
+     "neon": 0.0020110077777777775
+    },
+    "breakdown_usd_per_1k_games": {
+     "vault_llm": 2.4613073863636363,
+     "vercel_gateway": 1.7779046809902064,
+     "vercel_guard": 4.943021161168789,
+     "neon": 0.20110077777777777
+    },
+    "neon_bytes_per_game": 48780,
+    "vault_tokens_per_game": 16899.882,
+    "vault_calls_per_game": 60.68,
+    "guard_calls_per_game": 105.18,
+    "guard_cpu_s_per_game": 117.29750547299781,
+    "guard_gb_s_per_game": 240.90592003690475,
+    "gateway_cpu_s_per_game": 8.030999999999999,
+    "gateway_gb_s_per_game": 466.08385392120226,
+    "gateway_invocations_per_game": 200.0,
+    "guard_invocations_per_game": 105.18181818181817,
+    "free_tier_ceiling_games_per_month": {
+     "vercel_active_cpu_4h": 115,
+     "vercel_memory_360gbh": 1833,
+     "vercel_invocations_1m": 3277,
+     "groq_tpd_200k_per_month_one_model": 355,
+     "groq_rpd_1000_per_month_one_model": 494,
+     "neon_storage_1gb": 20500
+    },
+    "binding_limit": "vercel_active_cpu_4h"
+   },
+   "openai/gpt-oss-120b": {
+    "messages": 100,
+    "usd_per_game": 0.011844641392664045,
+    "usd_per_1k_games": 11.844641392664045,
+    "usd_per_1k_requests": 0.11844641392664045,
+    "breakdown_usd_per_1k_requests": {
+     "vault_llm": 0.04922614772727272,
+     "vercel_gateway": 0.017779046809902065,
+     "vercel_guard": 0.04943021161168789,
+     "neon": 0.0020110077777777775
+    },
+    "breakdown_usd_per_1k_games": {
+     "vault_llm": 4.922614772727273,
+     "vercel_gateway": 1.7779046809902064,
+     "vercel_guard": 4.943021161168789,
+     "neon": 0.20110077777777777
+    },
+    "neon_bytes_per_game": 48780,
+    "vault_tokens_per_game": 16899.882,
+    "vault_calls_per_game": 60.68,
+    "guard_calls_per_game": 105.18,
+    "guard_cpu_s_per_game": 117.29750547299781,
+    "guard_gb_s_per_game": 240.90592003690475,
+    "gateway_cpu_s_per_game": 8.030999999999999,
+    "gateway_gb_s_per_game": 466.08385392120226,
+    "gateway_invocations_per_game": 200.0,
+    "guard_invocations_per_game": 105.18181818181817,
+    "free_tier_ceiling_games_per_month": {
+     "vercel_active_cpu_4h": 115,
+     "vercel_memory_360gbh": 1833,
+     "vercel_invocations_1m": 3277,
+     "groq_tpd_200k_per_month_one_model": 355,
+     "groq_rpd_1000_per_month_one_model": 494,
+     "neon_storage_1gb": 20500
+    },
+    "binding_limit": "vercel_active_cpu_4h"
+   },
+   "qwen/qwen3.8-27b": {
+    "messages": 100,
+    "usd_per_game": 0.03349467025630041,
+    "usd_per_1k_games": 33.49467025630041,
+    "usd_per_1k_requests": 0.33494670256300413,
+    "breakdown_usd_per_1k_requests": {
+     "vault_llm": 0.26572643636363635,
+     "vercel_gateway": 0.017779046809902065,
+     "vercel_guard": 0.04943021161168789,
+     "neon": 0.0020110077777777775
+    },
+    "breakdown_usd_per_1k_games": {
+     "vault_llm": 26.572643636363637,
+     "vercel_gateway": 1.7779046809902064,
+     "vercel_guard": 4.943021161168789,
+     "neon": 0.20110077777777777
+    },
+    "neon_bytes_per_game": 48780,
+    "vault_tokens_per_game": 13181.068000000001,
+    "vault_calls_per_game": 60.68,
+    "guard_calls_per_game": 105.18,
+    "guard_cpu_s_per_game": 117.29750547299781,
+    "guard_gb_s_per_game": 240.90592003690475,
+    "gateway_cpu_s_per_game": 8.030999999999999,
+    "gateway_gb_s_per_game": 466.08385392120226,
+    "gateway_invocations_per_game": 200.0,
+    "guard_invocations_per_game": 105.18181818181817,
+    "free_tier_ceiling_games_per_month": {
+     "vercel_active_cpu_4h": 115,
+     "vercel_memory_360gbh": 1833,
+     "vercel_invocations_1m": 3277,
+     "groq_tpd_200k_per_month_one_model": 455,
+     "groq_rpd_1000_per_month_one_model": 494,
+     "neon_storage_1gb": 20500
+    },
+    "binding_limit": "vercel_active_cpu_4h"
+   }
+  }
+ },
+ "per_level_usd_per_request": {
+  "1": {
+   "vault_call_share": 1.0,
+   "guard_calls_per_request": 0.0,
+   "vault_llm": {
+    "openai/gpt-oss-20b": 5.9010000000000006e-05,
+    "openai/gpt-oss-120b": 0.00011802000000000001,
+    "qwen/qwen3.8-27b": 0.000752
+   },
+   "vercel_gateway": 1.8012133333333333e-05,
+   "vercel_guard": 0.0,
+   "neon_storage_per_month_retained": 2.734576923076923e-07
+  },
+  "2": {
+   "vault_call_share": 0.816,
+   "guard_calls_per_request": 0.0,
+   "vault_llm": {
+    "openai/gpt-oss-20b": 2.1081051136363634e-05,
+    "openai/gpt-oss-120b": 4.216210227272727e-05,
+    "qwen/qwen3.8-27b": 0.00015006200000000001
+   },
+   "vercel_gateway": 8.59402359963269e-06,
+   "vercel_guard": 0.0,
+   "neon_storage_per_month_retained": 1.2224169421487602e-07
+  },
+  "3": {
+   "vault_call_share": 0.686,
+   "guard_calls_per_request": 1.0,
+   "vault_llm": {
+    "openai/gpt-oss-20b": 2.7617556818181813e-05,
+    "openai/gpt-oss-120b": 5.523511363636363e-05,
+    "qwen/qwen3.8-27b": 0.00022035018181818178
+   },
+   "vercel_gateway": 1.618634673003444e-05,
+   "vercel_guard": 4.699501536115529e-05,
+   "neon_storage_per_month_retained": 1.639568881118881e-07
+  },
+  "4": {
+   "vault_call_share": 0.273,
+   "guard_calls_per_request": 2.0,
+   "vault_llm": {
+    "openai/gpt-oss-20b": 1.045022727272727e-05,
+    "openai/gpt-oss-120b": 2.090045454545454e-05,
+    "qwen/qwen3.8-27b": 0.00011906181818181817
+   },
+   "vercel_gateway": 2.223828739946282e-05,
+   "vercel_guard": 9.399003072231059e-05,
+   "neon_storage_per_month_retained": 1.46825e-07
+  },
+  "5": {
+   "vault_call_share": 0.259,
+   "guard_calls_per_request": 2.259,
+   "vault_llm": {
+    "openai/gpt-oss-20b": 4.90653409090909e-06,
+    "openai/gpt-oss-120b": 9.81306818181818e-06,
+    "qwen/qwen3.8-27b": 8.715818181818179e-05
+   },
+   "vercel_gateway": 2.386444298704704e-05,
+   "vercel_guard": 0.00010616601197497354,
+   "neon_storage_per_month_retained": 1.2807454545454544e-07
+  }
+ },
+ "sensitivity_guard_compute": {
+  "scenario": "typical",
+  "vault_model": "openai/gpt-oss-20b",
+  "rows": [
+   {
+    "guard_factor": 1.0,
+    "shadow_call": true,
+    "usd_per_1k_requests": 0.11244319710763835,
+    "usd_per_1k_games": 3.3732959132291502,
+    "vercel_guard_usd_per_1k_games": 2.236535503778618,
+    "vercel_active_cpu_ceiling_games_per_month": 260,
+    "binding_limit": "vercel_active_cpu_4h"
+   },
+   {
+    "guard_factor": 1.0,
+    "shadow_call": false,
+    "usd_per_1k_requests": 0.07602837456873071,
+    "usd_per_1k_games": 2.2808512370619214,
+    "vercel_guard_usd_per_1k_games": 1.2966351965555118,
+    "vercel_active_cpu_ceiling_games_per_month": 434,
+    "binding_limit": "vercel_active_cpu_4h"
+   },
+   {
+    "guard_factor": 0.2,
+    "shadow_call": true,
+    "usd_per_1k_requests": 0.04500510159569357,
+    "usd_per_1k_games": 1.350153047870807,
+    "vercel_guard_usd_per_1k_games": 0.47015073711935995,
+    "vercel_active_cpu_ceiling_games_per_month": 1106,
+    "binding_limit": "vercel_active_cpu_4h"
+   },
+   {
+    "guard_factor": 0.2,
+    "shadow_call": false,
+    "usd_per_1k_requests": 0.036931025976800924,
+    "usd_per_1k_games": 1.1079307793040278,
+    "vercel_guard_usd_per_1k_games": 0.2725706756747388,
+    "vercel_active_cpu_ceiling_games_per_month": 1682,
+    "binding_limit": "vercel_active_cpu_4h"
+   },
+   {
+    "guard_factor": 0.1,
+    "shadow_call": true,
+    "usd_per_1k_requests": 0.03657533965670047,
+    "usd_per_1k_games": 1.0972601897010141,
+    "vercel_guard_usd_per_1k_games": 0.24935264128695273,
+    "vercel_active_cpu_ceiling_games_per_month": 1866,
+    "binding_limit": "vercel_active_cpu_4h"
+   },
+   {
+    "guard_factor": 0.1,
+    "shadow_call": false,
+    "usd_per_1k_requests": 0.032043857402809704,
+    "usd_per_1k_games": 0.9613157220842913,
+    "vercel_guard_usd_per_1k_games": 0.14456261056464212,
+    "vercel_active_cpu_ceiling_games_per_month": 2625,
+    "binding_limit": "groq_tpd_200k_per_month_one_model"
+   }
+  ]
+ },
+ "active_cpu_ceiling_if_guard_time_is_p50": {
+  "note": "guard CPU per call = v2 median model time (0.72 s) instead of the 1.12 s warm mean (which includes the slow tail on a shared 1 vCPU)",
+  "games_per_month": 392
+ },
+ "cold_start": {
+  "usd_per_cold_start": 0.0004315333333333334,
+  "usd_per_1k_games_if_one_cold_start_per_game": 0.4315333333333334,
+  "note": "sparse traffic: the guard instance is idle between players; B3-vercel-bench-cold.json measured 12.8 s and 8.6-9.7 s boot"
+ }
+}

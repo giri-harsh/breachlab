@@ -52,6 +52,10 @@ Bootstrap confidence intervals, McNemar tests, slices, the worst misses, the 3-s
 
 **Game difficulty** (production, guard v2, 110 fresh attacks per boss; template runs in `docs/lanes/G-difficulty-prod.json`, ADR-0102): boss 1 leaks 79.1%, boss 2 57.3%, boss 3 30.0% (21.6% pooled with the 216 template attacks), bosses 4 and 5 0 of 326. Targets: 70+, 40-55, 20-35, 10 or less, 5 or less percent.
 
+### Cost
+
+**Free tiers, $0 today** (Groq free tier, Vercel Hobby, Neon free, Hugging Face free; Gemini is only the offline judge, not in the serving path). Measured from real vault-agent token usage and the guard's measured compute (`scripts/p_cost.py`, `docs/lanes/C-cost.md`), at list prices if usage went past the free tiers: about **$0.11 per 1,000 requests** and **$3.4 per 1,000 games** (a game is five bosses, about 30 messages; $1.7 for a quick game, $9.4 if every boss uses its full 20 messages). Per 1,000 games: guard on Vercel $2.24, vault LLM $0.47 (gpt-oss-20b; $5.1 if qwen3.8-27b serves), gateway $0.60, Neon $0.06. The limit that binds first is the Vercel Hobby Active CPU allowance (4 h a month, about 260 games a month at the measured 1.1 s of guard CPU per call), then Groq's 200k tokens a day per model. A guard with 5-10x lower compute (a cascade) would cost about $1.0 to $1.4 per 1,000 games and lift the Active CPU ceiling to roughly 1,100-1,900 games a month.
+
 ## Architecture
 
 ```mermaid

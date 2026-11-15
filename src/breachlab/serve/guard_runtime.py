@@ -38,6 +38,7 @@ class GuardResult:
     verdict: Verdict
     version: str
     latency_ms: float
+    stage: str | None = None  # cascade only: student | teacher | failed_closed
 
 
 class GuardModel:

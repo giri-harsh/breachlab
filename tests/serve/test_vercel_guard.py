@@ -262,3 +262,28 @@ def test_stage_is_self_contained_and_small(tmp_path: Path) -> None:
     cfg = json.loads((stage / "vercel.json").read_text())
     assert cfg["rewrites"] == [{"source": "/(.*)", "destination": "/api/index"}]
     assert not any(p.suffix in {".onnx", ".npz", ".safetensors"} for p in stage.rglob("*"))
+
+
+def test_cascade_mode_downloads_only_the_student_and_loads_the_teacher_lazily(
+    idx: ModuleType, monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    seen: list[str] = []
+
+    def handler(req: httpx.Request) -> httpx.Response:
+        seen.append(req.url.path)
+        return httpx.Response(200, content=b"{}")
+
+    real_client = httpx.Client
+    monkeypatch.setattr(
+        httpx, "Client", lambda **kw: real_client(transport=httpx.MockTransport(handler), **kw)
+    )
+    monkeypatch.setattr(idx, "WORK", tmp_path / "w")
+    monkeypatch.setattr(idx, "CASCADE_DIR", "cascade-test")
+    s = sa.Settings(token="hf_test", aliases=("champion",))
+    d = idx.real_download(s, "champion")
+    assert (d / "cascade" / "student-int8.onnx").exists() and idx._blob is None
+    assert any("cascade-test/student-int8.onnx" in p for p in seen)
+    assert not any(
+        p.endswith("guard-q4b32.onnx") for p in seen
+    )  # the 0.6B graph is not fetched at boot
+    assert "student_s" in idx._fetch
