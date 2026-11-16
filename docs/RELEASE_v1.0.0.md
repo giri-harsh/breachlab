@@ -3,7 +3,7 @@
 A web game where you try to trick a guarded AI vault into leaking a secret code across five bosses, built end to end as an MLOps project on free tiers ($0). Research demo, not a production safety system.
 
 ## What's live
-- **Game:** https://breachlab-web.vercel.app (Neon Arcade UI: 5 bosses + a daily boss, hints, skip boss, points and streaks, leaderboard, share card) with the gateway at https://breachlab-api.vercel.app/api/health.
+- **Game:** https://breach.harshgiri.site (Neon Arcade UI: 5 bosses + a daily boss, hints, skip boss, points and streaks, leaderboard, share card) with the gateway at https://breachlab-api.vercel.app/api/health.
 - **Guard v2** (Qwen3-0.6B + LoRA, SFT, int4 ONNX with prefix-KV reuse) serving bosses 3 to 5 from a 1 vCPU Vercel function; MLflow registry version 3 is `champion`, v1 is `previous` (rollback measured at a median 4.9 s).
 - **Hugging Face (public):** [model, Apache-2.0](https://huggingface.co/Pseudo-Harsh/breachlab-guard-v1) and [dataset, CC-BY-SA-3.0](https://huggingface.co/datasets/Pseudo-Harsh/breachlab-data).
 - Guard status is `ok | warming | down` at runtime (a cold guard shows "BOSS WAKING UP", never "offline"); the gateway fails closed.

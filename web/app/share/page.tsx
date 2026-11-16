@@ -18,7 +18,7 @@ async function origin(): Promise<string> {
       return `${proto === "http" ? "http" : "https"}://${host}`;
     }
   } catch { /* fall through */ }
-  return "https://breachlab-web.vercel.app";
+  return "https://breach.harshgiri.site";
 }
 
 export async function generateMetadata({ searchParams }: { searchParams: Search }): Promise<Metadata> {

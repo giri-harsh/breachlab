@@ -3,12 +3,12 @@
 [![CI](https://img.shields.io/github/actions/workflow/status/giri-harsh/breachlab/ci.yml?branch=main&label=ci)](https://github.com/giri-harsh/breachlab/blob/main/.github/workflows/ci.yml)
 [![Code: Apache-2.0](https://img.shields.io/badge/code-Apache--2.0-blue.svg)](LICENSE)
 [![Data: CC-BY-SA-3.0](https://img.shields.io/badge/data-CC--BY--SA--3.0-lightgrey.svg)](DATA_LICENSE.md)
-[![Play](https://img.shields.io/badge/play-live%20demo-ff2e93.svg)](https://breachlab-web.vercel.app)
+[![Play](https://img.shields.io/badge/play-live%20demo-ff2e93.svg)](https://breach.harshgiri.site)
 [![HF model](https://img.shields.io/badge/%F0%9F%A4%97-model-yellow.svg)](https://huggingface.co/Pseudo-Harsh/breachlab-guard-v1)
 [![HF dataset](https://img.shields.io/badge/%F0%9F%A4%97-dataset-yellow.svg)](https://huggingface.co/datasets/Pseudo-Harsh/breachlab-data)
 
 <p align="center">
-  <a href="https://breachlab-web.vercel.app"><img src="docs/media/demo.gif" alt="BreachLab demo: home, boss select, a level 1 leak, skipping a boss" width="640"></a><br>
+  <a href="https://breach.harshgiri.site"><img src="docs/media/demo.gif" alt="BreachLab demo: home, boss select, a level 1 leak, skipping a boss" width="640"></a><br>
   <sub>15 s recorded on production: home, boss select, a level 1 leak, skip boss (<a href="docs/media/demo.mp4">MP4</a>)</sub>
 </p>
 
@@ -17,7 +17,7 @@
 > **Research demo.** Not a claim of production safety. Prompts are logged and used to train the guard; do not enter personal data.
 
 ## Quick start
-- **Play:** https://breachlab-web.vercel.app (gateway `/api/health`: https://breachlab-api.vercel.app/api/health)
+- **Play:** https://breach.harshgiri.site (gateway `/api/health`: https://breachlab-api.vercel.app/api/health)
 - **Run it locally:** [`docs/LOCAL_DEV.md`](docs/LOCAL_DEV.md)
 - **Under the hood:** the site's *How it works* and *Model card* pages, [`reports/eval-v2.md`](reports/eval-v2.md), [`docs/decisions.md`](docs/decisions.md)
 

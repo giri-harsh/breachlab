@@ -1,6 +1,6 @@
 # 2-minute demo script
 
-Live: web https://breachlab-web.vercel.app, gateway https://breachlab-api.vercel.app, guard https://breachlab-guard.vercel.app. Record on a phone-sized window.
+Live: web https://breach.harshgiri.site, gateway https://breachlab-api.vercel.app, guard https://breachlab-guard.vercel.app. Record on a phone-sized window.
 
 **State of the demo (read first).** All five levels are live (ADR-0082). The guard is the int4 q4b32 graph on a Vercel Hobby function (1 vCPU, 2 GB). Three facts shape what you say and when:
 

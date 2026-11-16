@@ -5,7 +5,7 @@
 set -eu
 SCOPE=${SCOPE:-harshs-projects-d6e22d93}
 cd "$(dirname "$0")/.."
-export CORS_ORIGIN=${CORS_ORIGIN:-https://breachlab-web.vercel.app}
+export CORS_ORIGIN=${CORS_ORIGIN:-https://breachlab-web.vercel.app,https://breach.harshgiri.site}
 export AGENT_MODEL=${AGENT_MODEL:-openai/gpt-oss-20b}   # 120b hits its daily token cap on the free tier
 export GUARD_URL=${GUARD_URL:-https://placeholder.invalid}
 export CHAMPION_TTL_S=${CHAMPION_TTL_S:-30}

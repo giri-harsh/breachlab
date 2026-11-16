@@ -65,6 +65,6 @@ Level status: `locked | open | cleared | skipped`. Level N is open when N = 1 or
 
 7.8 `GET /api/stats` -> `{players_today, messages_today, bosses_defeated_today, blocks_today, last_breach: {boss, at}|null, updated_at}`; canary sessions excluded; cached 30 s; no nicknames or prompts.
 
-7.9 Share card (web project): `GET https://breachlab-web.vercel.app/api/og?boss=1-6&msgs=1-20&pts=0-99999&name=<=20 chars` -> 1200x630 PNG (next/og, arcade style, e.g. "I BEAT THE WATCHER IN 4 MESSAGES"); `/share?...` sets `og:image` / `twitter:image` to it. Inputs are validated and clamped; the card never shows a secret.
+7.9 Share card (web project): `GET https://breach.harshgiri.site/api/og?boss=1-6&msgs=1-20&pts=0-99999&name=<=20 chars` -> 1200x630 PNG (next/og, arcade style, e.g. "I BEAT THE WATCHER IN 4 MESSAGES"); `/share?...` sets `og:image` / `twitter:image` to it. Inputs are validated and clamped; the card never shows a secret.
 
 7.10 Ownership: lane G owns `src/breachlab/gateway/` (except `extras.py`), `configs/levels.yaml`, `migrations/`; lane V owns `src/breachlab/gateway/extras.py` (`/api/daily`, `/api/stats`), `web/app/api/og`, `web/app/share`, `web/app/daily`, `web/components/StatsTicker.tsx`, `web/components/ShareCard.tsx`; lane U owns the rest of `web/`.

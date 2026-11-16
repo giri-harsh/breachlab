@@ -174,6 +174,8 @@ data-v2 (v1 plus 2,172 hard-benign short, Hindi and Hinglish rows). Served int4 
 validation split: gold_test ASR 0.44%, FPR 1.83%; held-out short benign opener FPR 6.3% (v1: 54.3%), Hindi openers 15.0%
 (v1: 96%). Details and caveats: `reports/eval-v2.md` in the code repository. The numbers below describe v1.
 
+Play the live game: https://breach.harshgiri.site (alias https://breachlab-web.vercel.app).
+
 ## Update 2026-11-15: student cascade (`cascade-v2/`)
 
 The guard function runs a distilled student first (`cascade-v2/student-int8.onnx`, 136 MB DistilBERT int8, Apache-2.0

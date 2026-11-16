@@ -34,7 +34,7 @@ TEAM = "team_yIXRPPOQWbqXkM682GSKqORh"
 API_PROJECT = ("breachlab-api", "prj_xSY0LQ5tzcH3fdGT7EbDXbvk551N")
 WEB_PROJECT = ("breachlab-web", "prj_mWcWKnDvOQfVL99vf9MHbCIgWR8P")
 REPO_ID = 1438652749
-WEB_URL = "https://breachlab-web.vercel.app"
+WEB_URL = "https://breach.harshgiri.site"
 CATEGORIES = {"none", "injection", "jailbreak", "exfiltration"}
 
 

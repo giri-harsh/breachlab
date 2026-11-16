@@ -54,7 +54,7 @@ export default function ShareCard(props: ShareCardProps) {
     setStatus((await copy(link)) ? "LINK COPIED" : `COPY THIS LINK: ${link}`);
   }
 
-  const siteOrigin = "https://breachlab-web.vercel.app";
+  const siteOrigin = "https://breach.harshgiri.site";
   const intent = "https://twitter.com/intent/tweet" + "?" + new URLSearchParams({ text, url: siteOrigin + path }).toString();
   return (
     <div data-testid="share-card" style={{ display: "flex", flexWrap: "wrap", gap: 12, alignItems: "center" }}>
